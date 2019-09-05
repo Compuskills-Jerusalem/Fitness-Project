@@ -40,19 +40,19 @@ namespace PN_XAML
                     //Ben can change the first perameter to the projects server so it recieves the http message
                     PostRequest("http://ptsv2.com/t/8sebg-1567542394/post", location.Latitude.ToString(), location.Longitude.ToString());
 
-                //    lblLatitude.Text = "Your Latitude: " + location.Latitude.ToString();
-                //    lblLongitude.Text = "Your Longitude:" + location.Longitude.ToString();
-                //}
-                //if (jrusalem != null)
-                //{
-                //    jrlblLatitude.Text = "Jr Latitude: " + jrusalem.Latitude.ToString();
-                //    jrlblLongitude.Text = "Jr Longitude:" + jrusalem.Longitude.ToString();
-                //}
+                    //    lblLatitude.Text = "Your Latitude: " + location.Latitude.ToString();
+                    //    lblLongitude.Text = "Your Longitude:" + location.Longitude.ToString();
+                    //}
+                    //if (jrusalem != null)
+                    //{
+                    //    jrlblLatitude.Text = "Jr Latitude: " + jrusalem.Latitude.ToString();
+                    //    jrlblLongitude.Text = "Jr Longitude:" + jrusalem.Longitude.ToString();
+                    //}
 
-                ////if (distance < 25)
-                ////{
-                ////    lblAlert.Text = ("you are being alerted because your distance from Jeruselum is less than 25 km, your current distance from jr is "+ Math.Round(distance)+" km");
-
+                    //if (distance < 25)
+                    //{
+                    //    lblAlert.Text = ("you are being alerted because your distance from Jeruselum is less than 25 km, your current distance from jr is "+ Math.Round(distance)+" km");
+                    lblConfirmation.Text = "You are not set up to recieve notification";
 
                 }
 

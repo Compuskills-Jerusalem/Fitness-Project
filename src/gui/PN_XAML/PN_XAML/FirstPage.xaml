@@ -9,22 +9,26 @@
                  VerticalOptions="StartAndExpand">
         <StackLayout HorizontalOptions="Center"
                      VerticalOptions="Start">
-            <Image Margin="0,50,0,0"
+            
+            <!--<Image Margin="0,50,0,0"
                    x:Name="imgBanner"
                    Source="banner.png"></Image>
             <Image Margin="0,0,0,10"
                    x:Name="imgXamarinEssential"
-                   Source="xamarinessential.png"></Image>
+                   Source="xamarinessential.png"></Image>-->
+            
             <Label Margin="0,0,0,10"
                    Text="Geolocation"
                    FontAttributes="Bold"
                    FontSize="Large"
                    TextColor="#CA6F1E"
                    HorizontalTextAlignment="Center"></Label>
+            
             <Button x:Name="btnLocation"
                     Text="Get Location"
                     Clicked="btnLocation_Clicked" />
-            <Label HorizontalTextAlignment="Center"
+            
+            <!--<Label HorizontalTextAlignment="Center"
                    x:Name="lblLatitude"></Label>
             <Label HorizontalTextAlignment="Center"
                    x:Name="lblLongitude"></Label>
@@ -37,7 +41,12 @@
             <Label HorizontalTextAlignment="Center"
                    x:Name="lblDistance"></Label>
             <Label HorizontalTextAlignment="Center"
-                   x:Name="lblAlert"></Label>
+                   x:Name="lblAlert"></Label>-->
+
+                <Label HorizontalTextAlignment="Center"
+                       x:Name="lblConfirmation">
+                    
+                </Label>
         </StackLayout>
     </StackLayout>
     </ScrollView>
