@@ -14,10 +14,10 @@ namespace FitnessProjectServerSide.Controllers
             return View();
         }
 
-        [HttpGet]
-        public void RelayMessage(double Latitude, double Longitude)
+        [HttpPost]
+        public void RelayMessage(Geolocation PersonsLocation)
         {
-            Geolocation PersonsLocation = new Geolocation() { Latitude=Latitude, Longitude=Longitude};
+       
             GpsSensor gpsSensor = new GpsSensor(PersonsLocation);            
             MessageRelayer relayer = new MessageRelayer();
             relayer.RelayMessage(gpsSensor);
