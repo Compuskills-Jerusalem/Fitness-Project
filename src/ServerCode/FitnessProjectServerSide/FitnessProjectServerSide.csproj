@@ -162,9 +162,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="..\..\..\..\Documents\HomeWorkAssignments\MobileGPS2Controller.cs">
-      <Link>Controllers\MobileGPS2Controller.cs</Link>
-    </Compile>
+    <Compile Include="Controllers\MobileGPS2Controller.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Geolocation.cs" />
     <Compile Include="Global.asax.cs">
