@@ -17,7 +17,7 @@ namespace FitnessProjectServerSide.Controllers
         [HttpPost]
         public void RelayMessage(Geolocation PersonsLocation)
         {
-       
+            var a = 1;
             GpsSensor gpsSensor = new GpsSensor(PersonsLocation);            
             MessageRelayer relayer = new MessageRelayer();
             relayer.RelayMessage(gpsSensor);
