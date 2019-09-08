@@ -24,12 +24,12 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult GetLadLon(string Address)
         {
-            
+
             const string Api = "Your Api Key";
             string url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
             string url2 = "&key=" + Api + "&sensor=false";
             var Result = new WebClient().DownloadString(url + Address + url2);
-            Response jsonResult = JsonConvert.DeserializeObject<Response>(Result);
+            HttpResponse jsonResult = JsonConvert.DeserializeObject<HttpResponse>(Result);
             string status = jsonResult.Status;
             string location = string.Empty;
             if (status == "OK")
@@ -39,8 +39,8 @@ namespace WebApplication1.Controllers
                     location += "Latitude" + jsonResult.Results[i].Geometry.Location.Lat +
                          "/Longitude" + jsonResult.Results[i].Geometry.Location.Lng;
                 }
-                
-                    return View((object) location);
+
+                return View((object)location);
             }
             else
                 return View(status);
