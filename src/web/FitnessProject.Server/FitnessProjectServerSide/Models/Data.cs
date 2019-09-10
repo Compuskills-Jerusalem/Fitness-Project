@@ -5,7 +5,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    namespace WebApplication1.Controllers
+    namespace FitnessProjectServerSide
 {
     public class Place
     {
