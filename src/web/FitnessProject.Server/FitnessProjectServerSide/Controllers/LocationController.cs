@@ -7,7 +7,7 @@ using Newtonsoft.Json; //added JSON.NET with Nuget
 using Newtonsoft.Json.Linq;
 using System.Net;
 using System.Text;
-namespace WebApplication1.Controllers
+namespace FitnessProjectServerSide.Controllers
 {
     public class LocationController : Controller
     {
