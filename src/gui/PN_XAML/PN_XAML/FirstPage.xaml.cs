@@ -38,7 +38,7 @@ namespace PN_XAML
                 if (location != null)
                 {
                     //Ben can change the first perameter to the projects server so it recieves the http message
-                    PostRequest("http://ptsv2.com/t/8sebg-1567542394/post", location.Latitude.ToString(), location.Longitude.ToString());
+                    PostRequest("http://10.0.2.2:55588/MobileGPS/RelayMessage", location.Latitude.ToString(), location.Longitude.ToString());
 
                     //    lblLatitude.Text = "Your Latitude: " + location.Latitude.ToString();
                     //    lblLongitude.Text = "Your Longitude:" + location.Longitude.ToString();
@@ -75,8 +75,8 @@ namespace PN_XAML
         {
             IEnumerable<KeyValuePair<string, string>> queries = new List<KeyValuePair<string, string>>()
             {
-                {new KeyValuePair<string, string>(key: "Latitued", value: latitude) },
-                {new KeyValuePair<string, string>(key: "Longitued", value: longitude) }
+                {new KeyValuePair<string, string>(key: "Latitude", value: latitude) },
+                {new KeyValuePair<string, string>(key: "Longitude", value: longitude) }
             };
             FormUrlEncodedContent q = new FormUrlEncodedContent(queries);
             using (HttpClient client = new HttpClient())

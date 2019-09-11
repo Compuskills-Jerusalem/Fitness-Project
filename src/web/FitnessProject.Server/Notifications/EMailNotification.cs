@@ -50,10 +50,10 @@ namespace Notifications
             smtp.Dispose();
         }
     }
-    //SMS Api Using https://control.txtlocal.co.uk/docs/ Login: fopero@mail-line.net Password:3412534125Cc
+    //SMS Api Using https://control.txtlocal.co.uk/docs/ Login: qcr57223@oqiwq.com Password:3412534125Cc
     public class SMSNotification : INotifications
     {
-        public SMSNotification():this("Yy9sV4oyx+s-vEZ3Ks34kfiaYW2qQGwPoLq2o6VJ9g", "Capstone Projekt")
+        public SMSNotification():this("n6131WEXd5Y-0b0KBG44o7r4QmD25gv3GkwgmXSBeW", "Capstone Projekt")
         {
         }
         public SMSNotification(string apiKey, string senderName)
