@@ -1,17 +1,18 @@
-﻿@model WebApplication1.Controllers.Place
+﻿@model FitnessProjectServerSide.Addresses
 
 @{
-    ViewBag.Title = "GetPosition";
+    ViewBag.Title = "InputAddress";
 }
 
-<h2>GetPosition</h2>
+<h2>InputAddress</h2>
 
-@using (Html.BeginForm("GetLadLon", "Location")) 
+
+@using (Html.BeginForm("GetLadLon", "Location"))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Place</h4>
+        <h4>Addresses</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -33,3 +34,7 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

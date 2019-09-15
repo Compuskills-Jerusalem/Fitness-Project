@@ -1,18 +1,14 @@
 ﻿
-     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+   
 
     namespace FitnessProjectServerSide
 {
-    public class Place
+    public class Addresses
     {
         public string Address { get; set; }
     }
 
-        public class Response
+        public class MapsApiResponse
         {
 
             public string Status { get; set; }
