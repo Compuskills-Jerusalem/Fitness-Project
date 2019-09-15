@@ -29,7 +29,7 @@ namespace FitnessProjectServerSide.Controllers
             string url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
             string url2 = "&key=" + Api + "&sensor=false";
             var Result = new WebClient().DownloadString(url + Address + url2);
-            HttpResponse jsonResult = JsonConvert.DeserializeObject<HttpResponse>(Result);
+            Response jsonResult = JsonConvert.DeserializeObject<Response>(Result);
             string status = jsonResult.Status;
             string location = string.Empty;
             if (status == "OK")
