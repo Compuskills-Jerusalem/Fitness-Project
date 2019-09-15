@@ -6,8 +6,7 @@
 
 <h2>InputAddress</h2>
 
-
-@using (Html.BeginForm("GetLadLon", "Location"))
+@using (Html.BeginForm("GetLadLon", "Location")) 
 {
     @Html.AntiForgeryToken()
     
@@ -34,7 +33,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
