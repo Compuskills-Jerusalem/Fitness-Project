@@ -18,9 +18,9 @@ namespace FitnessProjectServerSide.Controllers
         public void RelayMessage(double Latitude, double Longitude)
         {
             Geolocation PersonsLocation = new Geolocation() { Latitude = Latitude, Longitude = Longitude };
-            GpsSensor gpsSensor = new GpsSensor(PersonsLocation);
-            MessageRelayer relayer = new MessageRelayer();
-            relayer.RelayMessage(gpsSensor);
+            //GpsSensor gpsSensor = new GpsSensor(PersonsLocation);
+           // MessageRelayer relayer = new MessageRelayer();
+           // relayer.RelayMessage(gpsSensor);
 
         }
 

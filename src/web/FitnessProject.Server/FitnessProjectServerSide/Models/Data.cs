@@ -3,8 +3,9 @@
 
     namespace FitnessProjectServerSide
 {
-    public class Addresses
+    public class Users
     {
+        public string Name { get; set; }
         public string Address { get; set; }
     }
 

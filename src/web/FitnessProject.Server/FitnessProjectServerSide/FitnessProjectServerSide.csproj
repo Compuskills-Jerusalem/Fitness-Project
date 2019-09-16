@@ -45,6 +45,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -163,18 +169,16 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
-    <Compile Include="Controllers\MobileGPS2Controller.cs" />
     <Compile Include="Geolocation.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="GpsSensor.cs" />
-    <Compile Include="IMessage.cs" />
-    <Compile Include="ISensor.cs" />
-    <Compile Include="MessageRelayer.cs" />
-    <Compile Include="MessageTargetList.cs" />
-    <Compile Include="MockImessageclass.cs" />
+    <Compile Include="LocationInterface.cs" />
     <Compile Include="Models\Data.cs" />
+    <Compile Include="Models\FittApp.cs" />
+    <Compile Include="Models\NoGoZone.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserNoGoZone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -227,8 +231,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Location\InputAddress.cshtml" />
-    <Content Include="Views\Location\GetLadLon.cshtml" />
+    <Content Include="Views\Location\Index.cshtml" />
+    <Content Include="Views\Location\UserInfo.cshtml" />
+    <Content Include="Views\Location\UpdateUserInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
