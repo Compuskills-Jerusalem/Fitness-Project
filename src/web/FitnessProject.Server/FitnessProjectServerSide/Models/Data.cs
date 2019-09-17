@@ -3,11 +3,6 @@
 
     namespace FitnessProjectServerSide
 {
-    public class Users
-    {
-        public string Name { get; set; }
-        public string Address { get; set; }
-    }
 
         public class MapsApiResponse
         {
