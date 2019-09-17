@@ -4,9 +4,10 @@
 }
 <script>
      $("button").on("click", function () {
-         $.ajax({
-             url: "Home.Create",
-         });
+             @Html.ActionLink("Home","Create")
+         //$.ajax({
+           //  url: "Home.Create",
+        // });
     });
 </script>
    
