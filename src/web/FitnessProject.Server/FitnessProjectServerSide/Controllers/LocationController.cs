@@ -24,14 +24,14 @@ namespace FitnessProjectServerSide.Controllers
                 
         }
         [HttpGet]
-        public ActionResult UserInfo()
+        public ActionResult GetAddress()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult UpdateUserInfo(string name , string address )
+        public ActionResult GetLadLon(string address)
         {
-            
+          //  string address = string.Empty;
             const string Api = "AIzaSyCRQ2A5WO3oLqDrjyQhx6BRmf5KSgoo950";
             string url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
             string url2 = "&key=" + Api + "&sensor=false";
@@ -53,9 +53,11 @@ namespace FitnessProjectServerSide.Controllers
                 
                 using (FittApp fitt = new FittApp())
                 {
-                    fitt.NoGoZones.Add(new NoGoZone {  Address = address, Laditude = ladi, Longitude = loni });
-                    fitt.Users.Add(new User { Name = name });
-                    fitt.SaveChanges();
+                  
+                        fitt.NoGoZones.Add(new NoGoZone { Address = address, Laditude = ladi, Longitude = loni });
+                       
+                        // fitt.UserNoGoZones.Add(new )
+                        fitt.SaveChanges();    
                 }
                     return View();
             }
