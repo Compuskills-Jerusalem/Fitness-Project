@@ -6,7 +6,7 @@ using System.Data.Entity;
 
 namespace FitnessProjectServerSide.Models
 {
-    public class FittApp:DbContext
+    public class FittAppContext:DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<NoGoZone> NoGoZones { get; set; }
