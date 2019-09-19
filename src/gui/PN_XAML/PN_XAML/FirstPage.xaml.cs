@@ -37,8 +37,9 @@ namespace PN_XAML
                 //double distance = Xamarin.Essentials.Location.CalculateDistance(location, jrusalem, DistanceUnits.Kilometers);
                 if (location != null)
                 {
+                    int userID = 1;
                     //Ben can change the first perameter to the projects server so it recieves the http message
-                    PostRequest("http://10.0.2.2:55588/MobileGPS/RelayMessage", location.Latitude.ToString(), location.Longitude.ToString());
+                    PostRequest("http://10.0.2.2:55588/MobileGPS/RelayMessage", location.Latitude.ToString(), location.Longitude.ToString(), userID.ToString());
 
                     //    lblLatitude.Text = "Your Latitude: " + location.Latitude.ToString();
                     //    lblLongitude.Text = "Your Longitude:" + location.Longitude.ToString();
@@ -71,12 +72,13 @@ namespace PN_XAML
             }
 
         }
-        async static void PostRequest(string url, string latitude, string longitude)
+        async static void PostRequest(string url, string latitude, string longitude, string userId)
         {
             IEnumerable<KeyValuePair<string, string>> queries = new List<KeyValuePair<string, string>>()
             {
                 {new KeyValuePair<string, string>(key: "Latitude", value: latitude) },
-                {new KeyValuePair<string, string>(key: "Longitude", value: longitude) }
+                {new KeyValuePair<string, string>(key: "Longitude", value: longitude) },
+                {new KeyValuePair<string, string>(key: "UserId", value: userId) }
             };
             FormUrlEncodedContent q = new FormUrlEncodedContent(queries);
             using (HttpClient client = new HttpClient())
