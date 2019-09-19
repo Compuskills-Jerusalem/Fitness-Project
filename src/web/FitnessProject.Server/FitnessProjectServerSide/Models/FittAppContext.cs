@@ -10,6 +10,6 @@ namespace FitnessProjectServerSide.Models
     {
         public DbSet<User> Users { get; set; }
         public DbSet<NoGoZone> NoGoZones { get; set; }
-        public DbSet<UserNoGoZone> UserNoGoZones { get; set; }
+       public DbSet<UserNoGoZone> UserNoGoZones { get; set; }
     }
 }
