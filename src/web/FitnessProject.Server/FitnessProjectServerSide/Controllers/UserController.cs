@@ -7,8 +7,10 @@ using FitnessProjectServerSide.Models;
 
 namespace FitnessProjectServerSide.Controllers
 {
+    
     public class UserController : Controller
     {
+      //  List<NoGoZone> noGos = null;
         // GET: User
         public ActionResult Index()
         {
@@ -48,7 +50,32 @@ namespace FitnessProjectServerSide.Controllers
             }
             return View();
         }
+        public ActionResult Login()
+        {
+            return View();
+        }
+        public ActionResult UserInfo(string name)
+        {
 
+            using (var fitt = new FittAppContext())
+            {
+
+                //  e model item passed into the dictionary is of type 'System.Data.Entity.Infrastructure.DbQuery`1[<>f__AnonymousType3`3[System.String,System.Double,System.Double]]', but this dictionary requires a model item of type 'System.Collections.Generic.IEnumerable`1[FitnessProjectServerSide.Models.NoGoZone]'.
+                var model = from person in fitt.UserNoGoZones
+                            where person.users.Name == name
+
+                            select person.UserNoGoZones.Address;
+              
+                    //noGos = fitt.NoGoZones.ToList();
+                // person.UserNoGoZones.Laditude,
+                // person.UserNoGoZones.Longitude
+
+                //  string a = Convert.ToString(model);
+                return View(model);
+            }
+               
+            
+            }
         // GET: User/Edit/5
      /*   public ActionResult Edit(int id)
         {

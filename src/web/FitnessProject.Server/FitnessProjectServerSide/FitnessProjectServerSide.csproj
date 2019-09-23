@@ -235,17 +235,17 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Location\Index.cshtml" />
     <Content Include="Views\Location\GetLadLon.cshtml" />
-    <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Location\GetAddress.cshtml" />
     <Content Include="Views\Location\Edit.cshtml" />
     <Content Include="Views\Location\List.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\UserInfo.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\Location\Details.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\UserInfo.cshtml" />
+    <Content Include="Views\User\User.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

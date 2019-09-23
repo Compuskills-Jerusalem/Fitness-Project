@@ -1,12 +1,6 @@
 ﻿@model FitnessProjectServerSide.Models.Users
 
-@{
-    ViewBag.Title = "Login";
-}
-
-<h2>Login</h2>
-
-@using (Html.BeginForm("UserInfo","Home")) 
+@using (Html.BeginForm("UserInfo","User")) 
 {
     @Html.AntiForgeryToken()
     

@@ -28,16 +28,7 @@ namespace FitnessProjectServerSide.Controllers
             return View(noGos);
              
         }
-        public ActionResult Details(int id)
-        {
-            using (var fitt = new FittAppContext())
-            {
-                var model = fitt.UserNoGoZones.FirstOrDefault(x => x.NoGoZoneId == id);
-              
-                return View(model);
-            }
-             
-        }
+      
         [HttpGet]
         public ActionResult GetAddress()
         {
