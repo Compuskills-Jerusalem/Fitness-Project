@@ -50,6 +50,7 @@ namespace FitnessProjectServerSide.Controllers
             }
             return View();
         }
+
         public ActionResult Login()
         {
             return View();
@@ -64,12 +65,11 @@ namespace FitnessProjectServerSide.Controllers
                 var model = from person in fitt.UserNoGoZones
                             where person.users.Name == name
 
-                            select person.UserNoGoZones.Address;
-              
-                    //noGos = fitt.NoGoZones.ToList();
-                // person.UserNoGoZones.Laditude,
-                // person.UserNoGoZones.Longitude
-
+                            select new
+                            { person.UserNoGoZones.Address,
+                                person.UserNoGoZones.Laditude,
+                                person.UserNoGoZones.Longitude,
+                            };
                 //  string a = Convert.ToString(model);
                 return View(model);
             }
