@@ -14,14 +14,21 @@ namespace FitnessProjectServerSide.Controllers
 {
     public class LocationController : Controller
     {
+        List<NoGoZone> noGos = null;
         const string Api = "AIzaSyCRQ2A5WO3oLqDrjyQhx6BRmf5KSgoo950";
         string url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
         string url2 = "&key=" + Api + "&sensor=false";
         // GET: Location
         public ActionResult Index()
         {
-            return View();
+            using (var fitt=new FittAppContext())
+            {
+                noGos = fitt.NoGoZones.ToList();
+            }
+            return View(noGos);
+             
         }
+      
         [HttpGet]
         public ActionResult GetAddress()
         {
@@ -76,57 +83,18 @@ namespace FitnessProjectServerSide.Controllers
                 return View(model);
             }
         }
+        
         [HttpPost]
-        public ActionResult Login(int id, NoGoZone noGoZone)
+        public ActionResult List(int id,NoGoZone noGoZone)
         {
             using (FittAppContext fitt = new FittAppContext())
             {
-
-                if (ModelState.IsValid)
-                {
-                    var model = fitt.UserNoGoZones.FirstOrDefault(x => x.NoGoZoneId == id);
-                    {
-                        model.NoGoZone.Address = noGoZone.Address;
-                        var Result = new WebClient().DownloadString(url + noGoZone + url2);
-                        MapsApiResponse jsonResult = JsonConvert.DeserializeObject<MapsApiResponse>(Result);
-                        string status = jsonResult.Status;
-                        string lad = string.Empty;
-                        string lon = string.Empty;
-                        if (status == "OK")
-                        {
-                            for (int i = 0; i < jsonResult.Results.Length; i++)
-                            {
-                                lad += jsonResult.Results[i].Geometry.Location.Lat;
-                                lon += jsonResult.Results[i].Geometry.Location.Lng;
-                            }
-                            double ladi = Convert.ToDouble(lad);
-                            double loni = Convert.ToDouble(lon);
-                        }
-
-                    }
-                    fitt.SaveChanges();
-                }
-                return RedirectToAction("List");
-        }
-        }
-        [HttpGet]
-        public ActionResult List(int id)
-        {
-            using (FittAppContext fitt = new FittAppContext())
-            {
-                var model = fitt.UserNoGoZones.FirstOrDefault(x => x.UserId == id).NoGoZone.Address;
-                return RedirectToAction("List",model);
+               var model = fitt.UserNoGoZones.FirstOrDefault(x => x.UserId == id);
+                model.UserNoGoZones.Address = noGoZone.Address;
+                return  View (model);
             }
         }
-        [HttpPost]
-        public ActionResult PostList(int id)
-        {
-            using (FittAppContext fitt = new FittAppContext())
-            {
-                var model = fitt.UserNoGoZones.FirstOrDefault(x => x.UserId == id).NoGoZone.Address;
-                return RedirectToAction("List");
-            }
-        }
+      
 
     }
 }
