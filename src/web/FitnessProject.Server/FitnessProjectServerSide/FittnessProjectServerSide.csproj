@@ -245,6 +245,9 @@
     <Content Include="Views\Location\Details.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\UserInfo.cshtml" />
+    <Content Include="Views\Location\Delete.cshtml" />
+    <Content Include="Views\Location\UserQuery.cshtml" />
+    <Content Include="Views\Location\UserQueryResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

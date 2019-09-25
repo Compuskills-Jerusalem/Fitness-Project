@@ -25,57 +25,78 @@ namespace FitnessProjectServerSide.Controllers
             {
                 noGos = fitt.NoGoZones.ToList();
             }
-            return View(noGos);
-             
+            return View(noGos);         
         }
-      
+        [HttpGet]
+        public ActionResult UserQuery()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult UserQueryResult(string name,NoGoZone noGo)
+        {
+            using (var fitt = new FittAppContext())
+            {
+               
+                //  e model item passed into the dictionary is of type 'System.Data.Entity.Infrastructure.DbQuery`1[<>f__AnonymousType3`3[System.String,System.Double,System.Double]]', but this dictionary requires a model item of type 'System.Collections.Generic.IEnumerable`1[FitnessProjectServerSide.Models.NoGoZone]'.
+                var model = from person in fitt.UserNoGoZones
+                            where person.users.Name == name
+                            select new
+                            {
+                                person.NoGoZones.Address,
+                               person.NoGoZones.Laditude,
+                                person.NoGoZones.Longitude,
+                               
+                            };
+                return View(model.ToList());
+
+            }
+           
+        }
+
         [HttpGet]
         public ActionResult GetAddress()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult GetLadLon(string address, string address2)
+        public ActionResult GetLadLon(string address,int id,int id2)
         {
-            //  string address = string.Empty;
-
-            var Result = new WebClient().DownloadString(url + address + url2);
-            var Result2 = new WebClient().DownloadString(url + address2 + url2);
-            MapsApiResponse jsonResult = JsonConvert.DeserializeObject<MapsApiResponse>(Result);
-            MapsApiResponse jsonResult2 = JsonConvert.DeserializeObject<MapsApiResponse>(Result2);
-            string status = jsonResult.Status;
-            string lad = string.Empty;
-            string lon = string.Empty;
-            if (status == "OK")
+            using (FittAppContext fitt = new FittAppContext())
             {
-                for (int i = 0; i < jsonResult.Results.Length; i++)
-                {
-                    lad += jsonResult.Results[i].Geometry.Location.Lat;
-                    lon += jsonResult.Results[i].Geometry.Location.Lng;
-                }
-                double ladi = Convert.ToDouble(lad);
-                double loni = Convert.ToDouble(lon);
+                
+               // foreach (var item in fitt.NoGoZones)
+              //  {
+                 //   if(address!=item.Address)
+                   // {
+                        var Result = new WebClient().DownloadString(url + address + url2);
 
-                using (FittAppContext fitt = new FittAppContext())
-                {
-                    if (ModelState.IsValid)
-                    {
+                        MapsApiResponse jsonResult = JsonConvert.DeserializeObject<MapsApiResponse>(Result);
+
+                        string status = jsonResult.Status;
+                        string lad = string.Empty;
+                        string lon = string.Empty;
+                        for (int i = 0; i < jsonResult.Results.Length; i++)
+                        {
+                            lad += jsonResult.Results[i].Geometry.Location.Lat;
+                            lon += jsonResult.Results[i].Geometry.Location.Lng;
+                        }
+                        double ladi = Convert.ToDouble(lad);
+                        double loni = Convert.ToDouble(lon);
                         fitt.NoGoZones.Add(new NoGoZone { Address = address, Laditude = ladi, Longitude = loni });
-                        fitt.NoGoZones.Add(new NoGoZone { Address = address2, Laditude = ladi, Longitude = loni });
-                    }
-                    // var h = fitt.NoGoZones.Select(x => x.id).Max() + 1;
-                    fitt.SaveChanges();
-                }
-            }
-            else
-            {
-                return View(status);
+                /*}
+               else
+                {
+                    fitt.UserNoGoZones.Select(x => x.UserId==id);
+                    fitt.UserNoGoZones.Select(x => x.NoGoZoneId == id2);
+                    fitt.UserNoGoZones.Add( new UserNoGoZone { UserId = id, NoGoZoneId = id2 });
+                }*/
+                fitt.SaveChanges();
             }
             return View();
-
         }
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Delete(int id)
         {
             using (FittAppContext fitt = new FittAppContext())
             {
@@ -83,18 +104,22 @@ namespace FitnessProjectServerSide.Controllers
                 return View(model);
             }
         }
-        
         [HttpPost]
-        public ActionResult List(int id,NoGoZone noGoZone)
+        public ActionResult Delete(int id, NoGoZone noGoZone)
         {
             using (FittAppContext fitt = new FittAppContext())
             {
-               var model = fitt.UserNoGoZones.FirstOrDefault(x => x.UserId == id);
-                model.UserNoGoZones.Address = noGoZone.Address;
-                return  View (model);
+                var model = fitt.UserNoGoZones.FirstOrDefault(x => x.UserId == id);
+                fitt.UserNoGoZones.Remove(model);
+                fitt.SaveChanges();
+                return RedirectToAction("UserInfo", "Location");
             }
         }
-      
 
-    }
-}
+
+    }   
+        }
+          
+        
+
+

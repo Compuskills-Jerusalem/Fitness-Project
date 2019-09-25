@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,23 +11,31 @@ namespace FitnessProjectServerSide.Controllers
     
     public class UserController : Controller
     {
-      //  List<NoGoZone> noGos = null;
+        List<User> users = null;
+      
         // GET: User
         public ActionResult Index()
         {
             using (FittAppContext fitt = new FittAppContext())
             {
-                return View(fitt.Users);
+                users = fitt.Users.ToList();
             }
+            return View(users);
                 
         }
 
         /* GET: User/Details/5
         public ActionResult Details(int id)
         {
-            return View();
-        }
-        */
+
+            using (FittAppContext fitt = new FittAppContext())
+            {
+                var model = fitt.UserNoGoZones.FirstOrDefault(x => x.users.id == id);
+                return View(model);
+            }
+                
+        }*/
+        
         [HttpGet]
         public ActionResult Create()
         {
@@ -50,59 +59,66 @@ namespace FitnessProjectServerSide.Controllers
             }
             return View();
         }
-
+        [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
+        [HttpPost]
         public ActionResult UserInfo(string name)
         {
-
+          
             using (var fitt = new FittAppContext())
             {
 
                 //  e model item passed into the dictionary is of type 'System.Data.Entity.Infrastructure.DbQuery`1[<>f__AnonymousType3`3[System.String,System.Double,System.Double]]', but this dictionary requires a model item of type 'System.Collections.Generic.IEnumerable`1[FitnessProjectServerSide.Models.NoGoZone]'.
                 var model = from person in fitt.UserNoGoZones
+                                //  let p=person.UserNoGoZones.Address
                             where person.users.Name == name
 
-                            select new
-                            { person.UserNoGoZones.Address,
-                                person.UserNoGoZones.Laditude,
-                                person.UserNoGoZones.Longitude,
-                            };
-                //  string a = Convert.ToString(model);
-                return View(model);
+                            select person.NoGoZones.Address;
+                foreach (var item in model)
+                {
+                    return View(item);
+                }
+                
             }
-               
-            
-            }
+
+            return View();
+           
+        }
         // GET: User/Edit/5
-     /*   public ActionResult Edit(int id)
+       public ActionResult Edit(string name)
         {
             using (FittAppContext fitt = new FittAppContext())
             {
-                var model = fitt.UserNoGoZones.FirstOrDefault(x => x.users.id == id)
-               return View(model);
+                var model = fitt.Users.Where(x => x.Name == name);
+                return View(model);
             }
-            
+           
         }
 
         // POST: User/Edit/5
        [HttpPost]
-        public ActionResult Edit(int id, NoGoZone noGo)
+        public ActionResult Change(User user)
         {
-            try
+            using (FittAppContext fitt = new FittAppContext())
             {
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
+               
+                try
+                {
+                  //  model.users.Name = user.Name;
+                    return RedirectToAction("Index");
+                }
+                catch
+                {                  
+                }
                 return View();
             }
+             
         }
 
-        // GET: User/Delete/5
+        /* GET: User/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
