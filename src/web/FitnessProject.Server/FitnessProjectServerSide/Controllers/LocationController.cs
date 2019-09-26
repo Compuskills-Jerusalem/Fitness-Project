@@ -59,7 +59,9 @@ namespace FitnessProjectServerSide.Controllers
                         }
                         double ladi = Convert.ToDouble(lad);
                         double loni = Convert.ToDouble(lon);
+                Utility utility = new Utility();
                         fitt.NoGoZones.Add(new NoGoZone { Address = address, Laditude = ladi, Longitude = loni });
+                utility.AddDangerZoneToJoin(address);
                 /*}
                else
                 {

@@ -47,12 +47,14 @@ namespace FitnessProjectServerSide.Controllers
         {
             try
             {
+                Utility utility = new Utility();
                 using (FittAppContext fitt = new FittAppContext())
                 {
-
+                    utility.AddUserToJoin(name);
                     fitt.Users.Add(new User { Name = name });
                     fitt.SaveChanges();
                 }
+               
                 return RedirectToAction("GetAddress", "Location");
             }
             catch
@@ -91,13 +93,15 @@ namespace FitnessProjectServerSide.Controllers
             
             using (var fitt = new FittAppContext())
             {
-                UserInfoModel userInfo = new UserInfoModel();
+
                 //  e model item passed into the dictionary is of type 'System.Data.Entity.Infrastructure.DbQuery`1[<>f__AnonymousType3`3[System.String,System.Double,System.Double]]', but this dictionary requires a model item of type 'System.Collections.Generic.IEnumerable`1[FitnessProjectServerSide.Models.NoGoZone]'.
                 var model = from noGo in fitt.UserNoGoZones
                             where noGo.User.Name == User.Identity.Name
                             select new UserInfoModel
                             {
-                                Address = noGo.NoGoZone.Address
+                                Address = noGo.NoGoZone.Address,
+                                id = noGo.NoGoZoneId,
+                                id2 = noGo.UserId
                             };
 
              
