@@ -104,9 +104,4 @@ namespace FitnessProjectServerSide.Controllers
         }
 
 
-    }   
-        }
-          
-        
-
-
+    }
