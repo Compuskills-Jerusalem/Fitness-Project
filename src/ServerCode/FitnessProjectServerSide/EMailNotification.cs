@@ -6,11 +6,14 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 
-namespace Notifications
+namespace FitnessProjectServerSide
 {
-    public class EMailNotification :INotifications
+    public class EMailNotification : IAlert, INotifications
+
     {
-        public EMailNotification():this("compuskills.fitnessprojekt@gmail.com", "Compuskills Capstone", "3412534125")
+        
+
+        public EMailNotification() : this("compuskills.fitnessprojekt@gmail.com", "Compuskills Capstone", "3412534125")
         { }
         public EMailNotification(string senderEmail, string senderName, string senderPassword)
         {
@@ -22,8 +25,10 @@ namespace Notifications
         public string SenderEmail { get; set; }
         public string SenderName { get; set; }
         public string SenderPassword { get; set; }
-
+        public static int EMailNotificationAlertID { get {return eMailNotificationAlertID } set { } }
+        private static int eMailNotificationAlertID = 1;
         
+
         public void Send(MessageData messageData)
         {
             var fromAddress = new MailAddress(SenderEmail, SenderName);
@@ -49,11 +54,16 @@ namespace Notifications
             }
             smtp.Dispose();
         }
+
+        public void SendAlert()
+        {
+            throw new NotImplementedException();
+        }
     }
     //SMS Api Using https://control.txtlocal.co.uk/docs/ Login: qcr57223@oqiwq.com Password:3412534125Cc
     public class SMSNotification : INotifications
     {
-        public SMSNotification():this("n6131WEXd5Y-0b0KBG44o7r4QmD25gv3GkwgmXSBeW", "Capstone Projekt")
+        public SMSNotification() : this("n6131WEXd5Y-0b0KBG44o7r4QmD25gv3GkwgmXSBeW", "Capstone Projekt")
         {
         }
         public SMSNotification(string apiKey, string senderName)

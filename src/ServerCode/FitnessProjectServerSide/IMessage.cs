@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace FitnessProjectServerSide
 {
-   public interface IMessage
+   public interface IAlert
     {
+        int AlertID { get; set; }
         void SendAlert();
     }
 }

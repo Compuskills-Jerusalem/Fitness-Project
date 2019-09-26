@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace FitnessProjectServerSide
 {
-    public class MockImessageclass : IMessage
+    public class MockImessageclass : IAlert
     {
         public void SendAlert()
         {
