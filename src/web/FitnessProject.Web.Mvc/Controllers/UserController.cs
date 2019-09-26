@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FitnessProject.Web.Mvc.Models;
+using System.Web.Security;
 
 namespace FitnessProject.Web.Mvc.Controllers
 {
@@ -64,19 +65,42 @@ namespace FitnessProject.Web.Mvc.Controllers
         {
             return View();
         }
+
         [HttpPost]
-        public ActionResult UserInfo(string name)
+        public ActionResult Login(string name)
         {
-          
             using (var fitt = new FittAppContext())
             {
+                var user = fitt.Users.FirstOrDefault(x => x.Name == name);
+                if (user != null)
+                {
+                    FormsAuthentication.SetAuthCookie(name, createPersistentCookie: false);
+                    return RedirectToAction("UserInfo");
+                }
+                else
+                {
+                    ModelState.AddModelError("name", "Unknown username");
+                    return View();
+                }
+            }
+        }
 
+        [HttpGet]
+        public ActionResult UserInfo()
+        {
+            
+            using (var fitt = new FittAppContext())
+            {
+                UserInfoModel userInfo = new UserInfoModel();
                 //  e model item passed into the dictionary is of type 'System.Data.Entity.Infrastructure.DbQuery`1[<>f__AnonymousType3`3[System.String,System.Double,System.Double]]', but this dictionary requires a model item of type 'System.Collections.Generic.IEnumerable`1[FitnessProjectServerSide.Models.NoGoZone]'.
-                var model = from person in fitt.UserNoGoZones
-                                //  let p=person.UserNoGoZones.Address
-                            where person.users.Name == name
+                var model = from noGo in fitt.UserNoGoZones
+                            where noGo.User.Name == User.Identity.Name
+                            select new UserInfoModel
+                            {
+                                Address = noGo.NoGoZone.Address
+                            };
 
-                            select      person.NoGoZones.Address;
+             
                             
                 return View(model.AsEnumerable().ToList());
               

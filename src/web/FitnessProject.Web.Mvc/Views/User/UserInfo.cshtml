@@ -1,4 +1,10 @@
-﻿@model IEnumerable<string>
+﻿@model IEnumerable<FitnessProjectServerSide.Models.UserInfoModel>
+
+@{
+    ViewBag.Title = "UserInfo";
+}
+
+<h2>UserInfo</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -8,7 +14,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Address)
         </th>
-        
         <th></th>
     </tr>
 
@@ -17,11 +22,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.Address)
         </td>
-      
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         </td>
     </tr>
 }
