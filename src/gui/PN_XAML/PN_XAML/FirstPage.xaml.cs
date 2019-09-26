@@ -15,6 +15,8 @@ using System.Net.Http.Headers;
 using System.Net.Http;
 //using Org.Apache.Http.Protocol;
 using System.Threading;
+using System.Threading.Tasks;
+using Android.Locations;
 
 namespace PN_XAML
 {
@@ -31,42 +33,60 @@ namespace PN_XAML
         }
 
 
-        async void btnLocation_Clicked(object sender, System.EventArgs e)
+        void btnLocation_Clicked(object sender, System.EventArgs e)
         {
-
+            
             lblConfirmation.Text = "You are not set up to recieve notification";
-
-            while (true)
+            Task task = Task.Factory.StartNew(async () =>
             {
-                try
+                while (true)
                 {
-                    var location = await Geolocation.GetLastKnownLocationAsync();
+                 Xamarin.Essentials.Location  location = await Geolocation.GetLastKnownLocationAsync();
 
 
                     if (location != null)
                     {
                         int userID = 1;
 
-                        PostRequest("http://t/3b1jh-1569316876/post", location.Latitude.ToString(), location.Longitude.ToString(), userID.ToString());
-                        
+                        PostRequest("https://ptsv2.com/t/3b1jh-1569316876/post", location.Latitude.ToString(), location.Longitude.ToString(), userID.ToString());
+
                     }
+                    await Task.Delay(2000);
+                }
+                
+            }, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+
+            //while (true)
+            //{
+            //    try
+            //    {
+            //        var location = await Geolocation.GetLastKnownLocationAsync();
 
 
-                }
-                catch (FeatureNotSupportedException fnsEx)
-                {
-                    await DisplayAlert("Faild", fnsEx.Message, "OK");
-                }
-                catch (PermissionException pEx)
-                {
-                    await DisplayAlert("Faild", pEx.Message, "OK");
-                }
-                catch (Exception ex)
-                {
-                    await DisplayAlert("Faild", ex.Message, "OK");
-                }
-            Thread.Sleep(10000);
-            }
+            //        if (location != null)
+            //        {
+            //            int userID = 1;
+
+            //            PostRequest("http://t/3b1jh-1569316876/post", location.Latitude.ToString(), location.Longitude.ToString(), userID.ToString());
+                        
+            //        }
+
+
+            //    }
+            //    catch (FeatureNotSupportedException fnsEx)
+            //    {
+            //        await DisplayAlert("Faild", fnsEx.Message, "OK");
+            //    }
+            //    catch (PermissionException pEx)
+            //    {
+            //        await DisplayAlert("Faild", pEx.Message, "OK");
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        await DisplayAlert("Faild", ex.Message, "OK");
+            //    }
+            //Thread.Sleep(10000);
+            //}
 
 
             
