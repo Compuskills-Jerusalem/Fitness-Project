@@ -27,19 +27,9 @@ namespace FitnessProjectServerSide.Controllers
             }
             return View(noGos);         
         }
-        [HttpGet]
-        public ActionResult UserQuery()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult UserQueryResult(string name,NoGoZone noGo)
-        {
+       
            
-
-            }
-           
-        }
+        
 
         [HttpGet]
         public ActionResult GetAddress()
@@ -47,7 +37,7 @@ namespace FitnessProjectServerSide.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult GetLadLon(string address,int id,int id2)
+        public ActionResult GetLadLon(string address)
         {
             using (FittAppContext fitt = new FittAppContext())
             {
@@ -57,8 +47,7 @@ namespace FitnessProjectServerSide.Controllers
                  //   if(address!=item.Address)
                    // {
                         var Result = new WebClient().DownloadString(url + address + url2);
-
-                        MapsApiResponse jsonResult = JsonConvert.DeserializeObject<MapsApiResponse>(Result);
+                     MapsApiResponse jsonResult = JsonConvert.DeserializeObject<MapsApiResponse>(Result);
 
                         string status = jsonResult.Status;
                         string lad = string.Empty;
