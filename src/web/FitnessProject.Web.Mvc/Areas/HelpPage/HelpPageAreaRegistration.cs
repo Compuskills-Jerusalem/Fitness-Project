@@ -1,7 +1,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace FitnessProjectServerSide.Areas.HelpPage
+namespace FitnessProject.Web.Mvc.Areas.HelpPage
 {
     public class HelpPageAreaRegistration : AreaRegistration
     {

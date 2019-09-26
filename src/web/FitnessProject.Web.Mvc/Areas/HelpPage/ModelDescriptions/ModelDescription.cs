@@ -1,6 +1,6 @@
 using System;
 
-namespace FitnessProjectServerSide.Areas.HelpPage.ModelDescriptions
+namespace FitnessProject.Web.Mvc.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>
     /// Describes a type model.

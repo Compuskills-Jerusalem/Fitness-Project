@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace FitnessProjectServerSide.Areas.HelpPage.ModelDescriptions
+namespace FitnessProject.Web.Mvc.Areas.HelpPage.ModelDescriptions
 {
     public interface IModelDocumentationProvider
     {

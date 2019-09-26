@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace FitnessProjectServerSide
+namespace FitnessProject.Web.Mvc
 {
     public class BundleConfig
     {

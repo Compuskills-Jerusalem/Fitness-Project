@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Notifications
+namespace FitnessProject.Web.Notifications
 {
     interface INotifications
     {

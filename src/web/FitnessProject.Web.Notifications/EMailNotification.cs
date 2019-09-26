@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 
-namespace Notifications
+namespace FitnessProject.Web.Notifications
 {
     public class EMailNotification :INotifications
     {

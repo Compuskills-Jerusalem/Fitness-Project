@@ -4,9 +4,9 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using FitnessProjectServerSide.Models;
+using FitnessProject.Web.Mvc.Models;
 
-namespace FitnessProjectServerSide.Controllers
+namespace FitnessProject.Web.Mvc.Controllers
 {
     
     public class UserController : Controller

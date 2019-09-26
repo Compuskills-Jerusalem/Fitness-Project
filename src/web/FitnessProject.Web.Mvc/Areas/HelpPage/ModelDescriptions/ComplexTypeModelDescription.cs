@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace FitnessProjectServerSide.Areas.HelpPage.ModelDescriptions
+namespace FitnessProject.Web.Mvc.Areas.HelpPage.ModelDescriptions
 {
     public class ComplexTypeModelDescription : ModelDescription
     {

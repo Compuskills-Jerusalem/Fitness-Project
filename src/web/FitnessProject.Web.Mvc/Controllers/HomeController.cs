@@ -4,10 +4,10 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using FitnessProjectServerSide.Models;
-using Notifications;
+using FitnessProject.Web.Mvc.Models;
+using FitnessProject.Web.Notifications;
 
-namespace FitnessProjectServerSide.Controllers
+namespace FitnessProject.Web.Mvc.Controllers
 {
     public class HomeController : Controller
     {

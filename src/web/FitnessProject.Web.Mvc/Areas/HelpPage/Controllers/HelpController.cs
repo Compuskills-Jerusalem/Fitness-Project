@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using FitnessProjectServerSide.Areas.HelpPage.ModelDescriptions;
-using FitnessProjectServerSide.Areas.HelpPage.Models;
+using FitnessProject.Web.Mvc.Areas.HelpPage.ModelDescriptions;
+using FitnessProject.Web.Mvc.Areas.HelpPage.Models;
 
-namespace FitnessProjectServerSide.Areas.HelpPage.Controllers
+namespace FitnessProject.Web.Mvc.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

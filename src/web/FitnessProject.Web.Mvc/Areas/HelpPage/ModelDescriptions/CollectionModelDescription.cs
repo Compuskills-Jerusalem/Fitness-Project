@@ -1,4 +1,4 @@
-namespace FitnessProjectServerSide.Areas.HelpPage.ModelDescriptions
+namespace FitnessProject.Web.Mvc.Areas.HelpPage.ModelDescriptions
 {
     public class CollectionModelDescription : ModelDescription
     {

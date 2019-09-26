@@ -11,10 +11,10 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using FitnessProjectServerSide.Areas.HelpPage.ModelDescriptions;
-using FitnessProjectServerSide.Areas.HelpPage.Models;
+using FitnessProject.Web.Mvc.Areas.HelpPage.ModelDescriptions;
+using FitnessProject.Web.Mvc.Areas.HelpPage.Models;
 
-namespace FitnessProjectServerSide.Areas.HelpPage
+namespace FitnessProject.Web.Mvc.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace FitnessProjectServerSide.Areas.HelpPage
+namespace FitnessProject.Web.Mvc.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {

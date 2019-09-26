@@ -1,4 +1,4 @@
-﻿namespace FitnessProjectServerSide.Models
+﻿namespace FitnessProject.Web.Mvc.Models
 {
     public class UserNoGoZone
     {

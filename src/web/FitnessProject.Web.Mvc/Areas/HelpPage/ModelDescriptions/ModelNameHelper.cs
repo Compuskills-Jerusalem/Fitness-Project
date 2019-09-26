@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace FitnessProjectServerSide.Areas.HelpPage.ModelDescriptions
+namespace FitnessProject.Web.Mvc.Areas.HelpPage.ModelDescriptions
 {
     internal static class ModelNameHelper
     {

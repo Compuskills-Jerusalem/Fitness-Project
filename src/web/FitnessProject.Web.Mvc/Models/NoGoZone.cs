@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace FitnessProjectServerSide.Models
+namespace FitnessProject.Web.Mvc.Models
 {
     public class NoGoZone
     {

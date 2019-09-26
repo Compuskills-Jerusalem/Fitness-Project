@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace FitnessProjectServerSide
+namespace FitnessProject.Web.Mvc
 {
     public class FilterConfig
     {

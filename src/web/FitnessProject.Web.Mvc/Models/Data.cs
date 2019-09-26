@@ -1,7 +1,7 @@
 ﻿
    
 
-    namespace FitnessProjectServerSide
+    namespace FitnessProject.Web.Mvc
 {
 
         public class MapsApiResponse

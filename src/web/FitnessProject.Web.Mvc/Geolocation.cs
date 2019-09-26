@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace FitnessProjectServerSide
+namespace FitnessProject.Web.Mvc
 {
     public class Geolocation
     {

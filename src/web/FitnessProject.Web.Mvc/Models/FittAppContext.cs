@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 
-namespace FitnessProjectServerSide.Models
+namespace FitnessProject.Web.Mvc.Models
 {
     public class FittAppContext:DbContext
     {
