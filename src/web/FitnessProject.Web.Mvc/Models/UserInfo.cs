@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace FitnessProjectServerSide.Models
+namespace FitnessProject.Web.Mvc
 {
     public class UserInfoModel
     {
