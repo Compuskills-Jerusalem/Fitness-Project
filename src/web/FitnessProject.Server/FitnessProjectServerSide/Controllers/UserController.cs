@@ -76,16 +76,14 @@ namespace FitnessProjectServerSide.Controllers
                                 //  let p=person.UserNoGoZones.Address
                             where person.users.Name == name
 
-                            select person.NoGoZones.Address;
-                foreach (var item in model)
-                {
-                    return View(item);
-                }
+                            select      person.NoGoZones.Address;
+                            
+                return View(model.AsEnumerable().ToList());
+              
                 
             }
 
-            return View();
-           
+             
         }
         // GET: User/Edit/5
        public ActionResult Edit(string name)
