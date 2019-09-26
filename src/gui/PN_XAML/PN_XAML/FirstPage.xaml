@@ -27,10 +27,11 @@
             <Button x:Name="btnLocation"
                     Text="Get Location"
                     Clicked="btnLocation_Clicked" />
-            
+                <Label HorizontalTextAlignment="Center"
+                       x:Name="lblConfirmation"></Label>
+                <!--<Label HorizontalTextAlignment="Center"
+                   x:Name="lblLatitude"></Label>-->
             <!--<Label HorizontalTextAlignment="Center"
-                   x:Name="lblLatitude"></Label>
-            <Label HorizontalTextAlignment="Center"
                    x:Name="lblLongitude"></Label>
 
             <Label HorizontalTextAlignment="Center"
@@ -42,11 +43,9 @@
                    x:Name="lblDistance"></Label>
             <Label HorizontalTextAlignment="Center"
                    x:Name="lblAlert"></Label>-->
+            
 
-                <Label HorizontalTextAlignment="Center"
-                       x:Name="lblConfirmation">
-                    
-                </Label>
+
         </StackLayout>
     </StackLayout>
     </ScrollView>

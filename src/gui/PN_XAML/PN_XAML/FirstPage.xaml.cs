@@ -34,6 +34,7 @@ namespace PN_XAML
         async void btnLocation_Clicked(object sender, System.EventArgs e)
         {
 
+            lblConfirmation.Text = "You are not set up to recieve notification";
 
             while (true)
             {
@@ -46,8 +47,8 @@ namespace PN_XAML
                     {
                         int userID = 1;
 
-                        PostRequest("http://10.0.2.2:55588/MobileGPS/RelayMessage", location.Latitude.ToString(), location.Longitude.ToString(), userID.ToString());
-                        lblConfirmation.Text = "You are not set up to recieve notification";
+                        PostRequest("http://t/3b1jh-1569316876/post", location.Latitude.ToString(), location.Longitude.ToString(), userID.ToString());
+                        
                     }
 
 
