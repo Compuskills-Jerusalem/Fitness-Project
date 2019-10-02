@@ -15,9 +15,7 @@ namespace FitnessProjectServerSide.Controllers
     public class LocationController : Controller
     {
         List<NoGoZone> noGos = null;
-        const string Api = "AIzaSyCRQ2A5WO3oLqDrjyQhx6BRmf5KSgoo950";
-        string url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
-        string url2 = "&key=" + Api + "&sensor=false";
+       
         // GET: Location
         public ActionResult Index()
         {
