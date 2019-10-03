@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace FitnessProjectServerSide.Controllers
+namespace FitnessProject.Web.Mvc.Controllers
 {
     public class MobileGPSController : Controller
     {
