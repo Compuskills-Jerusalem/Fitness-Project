@@ -121,6 +121,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Essentials">
+      <HintPath>..\DistanceCalcSuicide\DistanceCalcSuicide\bin\Debug\Xamarin.Essentials.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Diagnostics.DiagnosticSource">
@@ -286,6 +289,10 @@
     <ProjectReference Include="..\DatabaseConn\DatabaseConn.csproj">
       <Project>{FFF69FEE-E79F-46A3-908B-1129F13D9A1D}</Project>
       <Name>DatabaseConn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DistanceCalcSuicide\DistanceCalcSuicide\FitnessProject.Web.Calc.csproj">
+      <Project>{bca0368f-4ef0-433b-9cca-1da31f94a2dc}</Project>
+      <Name>FitnessProject.Web.Calc</Name>
     </ProjectReference>
     <ProjectReference Include="..\FitnessProject.Web.Notifications\FitnessProject.Web.Notifications.csproj">
       <Project>{dae4d79c-5b95-411b-951f-6ddc7fb289b0}</Project>

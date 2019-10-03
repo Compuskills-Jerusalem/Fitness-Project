@@ -35,6 +35,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
@@ -52,11 +53,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DatabaseConn\DatabaseConn.csproj">
+      <Project>{FFF69FEE-E79F-46A3-908B-1129F13D9A1D}</Project>
+      <Name>DatabaseConn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FitnessProject.Web.Notifications\FitnessProject.Web.Notifications.csproj">
+      <Project>{DAE4D79C-5B95-411B-951F-6DDC7FB289B0}</Project>
+      <Name>FitnessProject.Web.Notifications</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
