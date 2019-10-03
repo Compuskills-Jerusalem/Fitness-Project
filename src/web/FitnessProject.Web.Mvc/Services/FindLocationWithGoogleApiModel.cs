@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using DatabaseConn;
+using FitnessProjectServerSide;
 using Newtonsoft.Json;
 
 namespace FitnessProject.Web.Mvc.Models
@@ -11,6 +12,7 @@ namespace FitnessProject.Web.Mvc.Models
 
     public class FindLocationWithGoogleApiModel : ILocation
     {
+        Utility utility = new Utility();
         public void FindLocation(string address)
         {
             const string Api = "AIzaSyCRQ2A5WO3oLqDrjyQhx6BRmf5KSgoo950";
@@ -31,7 +33,19 @@ namespace FitnessProject.Web.Mvc.Models
                 }
                 double ladi = Convert.ToDouble(lad);
                 double loni = Convert.ToDouble(lon);
-                fitt.NoGoZones.Add(new NoGoZone { Address = address, Laditude = ladi, Longitude = loni });
+                foreach (var item in fitt.NoGoZones)
+                {
+                   // if(address!=item.Address)
+                   // {
+                        fitt.NoGoZones.Add(new NoGoZone { Address = address, Laditude = ladi, Longitude = loni });         
+                     //   utility.AddDangerZoneToJoin(address);
+                   // }
+                   // else
+                   // {
+                     //   utility.AddDangerZoneToJoin(address);
+                   // }
+                }
+              
                 fitt.SaveChanges();
             }
         }

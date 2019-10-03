@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessProject.Web.Notifica
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseConn", "DatabaseConn\DatabaseConn.csproj", "{FFF69FEE-E79F-46A3-908B-1129F13D9A1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistanceCalcSuicide", "DistanceCalcSuicide\DistanceCalcSuicide\DistanceCalcSuicide.csproj", "{BCA0368F-4EF0-433B-9CCA-1DA31F94A2DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessProject.Web.Calc", "DistanceCalcSuicide\DistanceCalcSuicide\FitnessProject.Web.Calc.csproj", "{BCA0368F-4EF0-433B-9CCA-1DA31F94A2DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
