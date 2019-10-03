@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using DatabaseConn;
 
 namespace FitnessProject.Web.Mvc.Models
 {
@@ -14,12 +15,12 @@ namespace FitnessProject.Web.Mvc.Models
 
                 //  e model item passed into the dictionary is of type 'System.Data.Entity.Infrastructure.DbQuery`1[<>f__AnonymousType3`3[System.String,System.Double,System.Double]]', but this dictionary requires a model item of type 'System.Collections.Generic.IEnumerable`1[FitnessProjectServerSide.Models.NoGoZone]'.
                 var model = from person in fitt.UserNoGoZones
-                            where person.User.Name == name
+                            where person.Users.Name == name
                             select new
                             {
-                                person.NoGoZone.Address,
-                                person.NoGoZone.Laditude,
-                                person.NoGoZone.Longitude,
+                                person.NoGoZones.Address,
+                                person.NoGoZones.Laditude,
+                                person.NoGoZones.Longitude,
                             };
                 return model;
             }

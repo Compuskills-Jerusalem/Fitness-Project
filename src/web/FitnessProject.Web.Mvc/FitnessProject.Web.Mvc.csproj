@@ -170,22 +170,18 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="FindLocationWithGoogleApiModel.cs" />
     <Compile Include="Geolocation.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ILocation.cs" />
-    <Compile Include="LadLon.cs" />
-    <Compile Include="LocationInterface.cs" />
     <Compile Include="Models\Adresses.cs" />
     <Compile Include="Models\Data.cs" />
-    <Compile Include="Models\FittAppContext.cs" />
-    <Compile Include="Models\NoGoZone.cs" />
     <Compile Include="Models\Query.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserInfo.cs" />
-    <Compile Include="Models\UserNoGoZone.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -288,6 +284,10 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DatabaseConn\DatabaseConn.csproj">
+      <Project>{FFF69FEE-E79F-46A3-908B-1129F13D9A1D}</Project>
+      <Name>DatabaseConn</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FitnessProject.Web.Notifications\FitnessProject.Web.Notifications.csproj">
       <Project>{dae4d79c-5b95-411b-951f-6ddc7fb289b0}</Project>
       <Name>FitnessProject.Web.Notifications</Name>

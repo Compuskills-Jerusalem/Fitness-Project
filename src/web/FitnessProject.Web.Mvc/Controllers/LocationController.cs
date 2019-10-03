@@ -1,33 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Newtonsoft.Json; //added JSON.NET with Nuget
-using Newtonsoft.Json.Linq;
+using Newtonsoft.Json; 
 using System.Net;
-using System.Text;
-using FitnessProjectServerSide.Models;
-using System.Data.Entity;
+using DatabaseConn;
+using FitnessProject.Web.Mvc;
 
 namespace FitnessProjectServerSide.Controllers
 {
     public class LocationController : Controller
     {
         List<NoGoZone> noGos = null;
-       
+
         // GET: Location
         public ActionResult Index()
         {
-            using (var fitt=new FittAppContext())
+            using (var fitt = new FittAppContext())
             {
                 noGos = fitt.NoGoZones.ToList();
             }
-            return View(noGos);         
+            return View(noGos);
         }
-       
-           
-        
+
+
+
 
         [HttpGet]
         public ActionResult GetAddress()
@@ -37,44 +34,18 @@ namespace FitnessProjectServerSide.Controllers
         [HttpPost]
         public ActionResult GetLadLon(string address)
         {
-            using (FittAppContext fitt = new FittAppContext())
-            {
-                
-               // foreach (var item in fitt.NoGoZones)
-              //  {
-                 //   if(address!=item.Address)
-                   // {
-                        var Result = new WebClient().DownloadString(url + address + url2);
-                     MapsApiResponse jsonResult = JsonConvert.DeserializeObject<MapsApiResponse>(Result);
-
-                        string status = jsonResult.Status;
-                        string lad = string.Empty;
-                        string lon = string.Empty;
-                        for (int i = 0; i < jsonResult.Results.Length; i++)
-                        {
-                            lad += jsonResult.Results[i].Geometry.Location.Lat;
-                            lon += jsonResult.Results[i].Geometry.Location.Lng;
-                        }
-                        double ladi = Convert.ToDouble(lad);
-                        double loni = Convert.ToDouble(lon);
-                        fitt.NoGoZones.Add(new NoGoZone { Address = address, Laditude = ladi, Longitude = loni });
-                /*}
-               else
-                {
-                    fitt.UserNoGoZones.Select(x => x.UserId==id);
-                    fitt.UserNoGoZones.Select(x => x.NoGoZoneId == id2);
-                    fitt.UserNoGoZones.Add( new UserNoGoZone { UserId = id, NoGoZoneId = id2 });
-                }*/
-                fitt.SaveChanges();
-            }
+            FindLocationWithGoogleApiModel googleApiModel = new FindLocationWithGoogleApiModel();
+            googleApiModel.FindLocation(address);
             return View();
         }
+          
+        
         [HttpGet]
         public ActionResult Delete(int id)
         {
             using (FittAppContext fitt = new FittAppContext())
             {
-                var model = fitt.UserNoGoZones.FirstOrDefault(x => x.NoGoZoneId == id);
+                var model = fitt.UserNoGoZones.FirstOrDefault(x => x.NoGoZoneId== id);
                 return View(model);
             }
         }
@@ -89,6 +60,5 @@ namespace FitnessProjectServerSide.Controllers
                 return RedirectToAction("UserInfo", "Location");
             }
         }
-
-
     }
+}
