@@ -24,22 +24,27 @@ namespace DistanceCalcSuicide
         static void Main(string[] args)
         {
             Location Jerusalem = new Location(31.7683, 35.2137);
+
             Location BeitShemesh = new Location(31.7470, 34.9881);
+            Location BS2 = new Location(31.7470, 34.9881);
+
             Location TelAviv = new Location(32.0853, 34.7818);
-            //Location BS2 = new Location(31.7470, 34.9881);
+           
             Location CompuskillsJerusalem = new Location(31.7903, 35.2013);
             Location CJ2 = new Location(31.7903, 35.2013);
+
+            
 
             List<KeyValuePair<double, double>> DeathZones = new List<KeyValuePair<double, double>>()
         {
         new KeyValuePair<double, double>( Jerusalem.Latitude, Jerusalem.Longitude),
-        new KeyValuePair<double,double>(TelAviv.Latitude, TelAviv.Longitude),
-       // new KeyValuePair<double, double>( BS2.Latitude, BS2.Longitude),
-        new KeyValuePair<double, double>(CompuskillsJerusalem.Latitude, CompuskillsJerusalem.Longitude),
-        new KeyValuePair<double, double> (CJ2.Latitude, CJ2.Longitude)
+        new KeyValuePair<double, double>( TelAviv.Latitude, TelAviv.Longitude),
+       //new KeyValuePair<double, double>( BS2.Latitude, BS2.Longitude),
+       // new KeyValuePair<double, double>(CompuskillsJerusalem.Latitude, CompuskillsJerusalem.Longitude),
+        new KeyValuePair<double, double>(CJ2.Latitude, CJ2.Longitude)
         };
 
-            CalcPlace(BeitShemesh, DeathZones);
+            CalcPlace(CompuskillsJerusalem, DeathZones);
 
 
 
