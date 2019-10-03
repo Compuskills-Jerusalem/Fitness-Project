@@ -8,7 +8,7 @@ using DatabaseConn;
 using FitnessProject.Web.Mvc;
 using FitnessProject.Web.Mvc.Models;
 
-namespace FitnessProjectServerSide.Controllers
+namespace FitnessProject.Web.Mvc.Controllers
 {
     public class LocationController : Controller
     {

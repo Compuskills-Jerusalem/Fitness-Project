@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 
-namespace FitnessProjectServerSide
+namespace FitnessProject.Web.Mvc
 {
     public class Utility
     {
