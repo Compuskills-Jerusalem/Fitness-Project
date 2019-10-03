@@ -50,7 +50,7 @@ namespace FitnessProject.Web.Mvc.Controllers
             {
                 using (FittAppContext fitt = new FittAppContext())
                 {
-
+                    FormsAuthentication.SetAuthCookie(name, createPersistentCookie: false);
                     fitt.Users.Add(new User { Name = name });
                     fitt.SaveChanges();
                 }
@@ -93,7 +93,7 @@ namespace FitnessProject.Web.Mvc.Controllers
             using (var fitt = new FittAppContext())
             {
                 UserInfoModel userInfo = new UserInfoModel();
-                //  e model item passed into the dictionary is of type 'System.Data.Entity.Infrastructure.DbQuery`1[<>f__AnonymousType3`3[System.String,System.Double,System.Double]]', but this dictionary requires a model item of type 'System.Collections.Generic.IEnumerable`1[FitnessProject.Web.Mvc.Models.NoGoZone]'.
+                //  e model item passed into the dictionary is of type 'System.Data.Entity.Infrastructure.DbQuery`1[<>f__AnonymousType3`3[System.String,System.Double,System.Double]]', but this dictionary requires a model item of type 'System.Collections.Generic.IEnumerable`1[FitnessProjectServerSide.Models.NoGoZone]'.
                 var model = from noGo in fitt.UserNoGoZones
                             where noGo.Users.Name == User.Identity.Name
                             select new UserInfoModel
