@@ -1,4 +1,4 @@
-﻿using FitnessProjectServerSide.Models;
+﻿using DatabaseConn;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ namespace FitnessProjectServerSide
             using (var fitt = new FittAppContext())
             {            
                 var model = from noGo in fitt.UserNoGoZones
-                            where noGo.User.Name == name
+                            where noGo.Users.Name == name
                             select new UserNoGoZone
                             {
                                 UserId = noGo.UserId,
@@ -28,7 +28,7 @@ namespace FitnessProjectServerSide
             {
               
                 var model = from noGo in fitt.UserNoGoZones
-                            where noGo.NoGoZone.Address==address
+                            where noGo.NoGoZones.Address==address
                             select new UserNoGoZone
                             {
                                 NoGoZoneId = noGo.NoGoZoneId

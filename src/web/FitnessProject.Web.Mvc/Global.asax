@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="FitnessProjectServerSide.WebApiApplication" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="FitnessProject.Web.Mvc.WebApiApplication" Language="C#" %>

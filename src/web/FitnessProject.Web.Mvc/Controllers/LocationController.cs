@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System.Net;
 using DatabaseConn;
 using FitnessProject.Web.Mvc;
+using FitnessProject.Web.Mvc.Models;
 
 namespace FitnessProjectServerSide.Controllers
 {

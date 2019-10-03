@@ -4,10 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using DatabaseConn;
-using FitnessProjectServerSide;
 using Newtonsoft.Json;
 
-namespace FitnessProject.Web.Mvc
+namespace FitnessProject.Web.Mvc.Models
 {
 
     public class FindLocationWithGoogleApiModel : ILocation
