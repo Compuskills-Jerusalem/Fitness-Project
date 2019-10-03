@@ -8,7 +8,7 @@ using DatabaseConn;
 using FitnessProject.Web.Mvc;
 using FitnessProject.Web.Mvc.Models;
 
-namespace FitnessProject.Web.Mvc.Controllers
+namespace FitnessProjectServerSide.Controllers
 {
     public class LocationController : Controller
     {
@@ -31,6 +31,7 @@ namespace FitnessProject.Web.Mvc.Controllers
         [HttpPost]
         public ActionResult AddAddress (string address)
         {
+            
             FindLocationWithGoogleApiModel googleApiModel = new FindLocationWithGoogleApiModel();
             googleApiModel.FindLocation(address);
             return RedirectToAction("UserInfo", "User");
