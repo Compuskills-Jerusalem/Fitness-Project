@@ -43,23 +43,32 @@ namespace FitnessProject.Web.Mvc.Controllers
         {
             return View();
         }
+
         [HttpPost]
-        public ActionResult AddUser(string name)
+        public ActionResult Create(string name)
         {
             try
             {
                 using (FittAppContext fitt = new FittAppContext())
                 {
-                    FormsAuthentication.SetAuthCookie(name, createPersistentCookie: false);
-                    fitt.Users.Add(new User { Name = name });
-                    fitt.SaveChanges();
+                    if (fitt.Users.Any(x => x.Name == name))
+                    {
+                        ModelState.AddModelError("name", "That name is taken");
+                        return View();
+                    }
+                    else
+                    {
+                        fitt.Users.Add(new User { Name = name });
+                        fitt.SaveChanges();
+                        FormsAuthentication.SetAuthCookie(name, createPersistentCookie: true);
+                    }
                 }
-                return RedirectToAction("GetAddress", "Location");
+              
             }
             catch
             {             
             }
-            return View();
+            return RedirectToAction("GetAddress", "Location");
         }
         [HttpGet]
         public ActionResult Login()

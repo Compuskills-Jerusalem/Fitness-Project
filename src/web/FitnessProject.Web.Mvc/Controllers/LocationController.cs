@@ -10,6 +10,7 @@ using FitnessProject.Web.Mvc.Models;
 
 namespace FitnessProjectServerSide.Controllers
 {
+    [Authorize]
     public class LocationController : Controller
     {
         List<NoGoZone> noGos = null;
@@ -33,7 +34,7 @@ namespace FitnessProjectServerSide.Controllers
         {
             
             FindLocationWithGoogleApiModel googleApiModel = new FindLocationWithGoogleApiModel();
-            googleApiModel.FindLocation(address);
+            googleApiModel.FindLocation(address, User.Identity.Name);
             return RedirectToAction("UserInfo", "User");
         }
           

@@ -4,19 +4,16 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using DatabaseConn;
-using FitnessProjectServerSide;
 using Newtonsoft.Json;
 
 namespace FitnessProject.Web.Mvc.Models
 {
-
     public class FindLocationWithGoogleApiModel : ILocation
     {
-        Utility utility = new Utility();
-        public void FindLocation(string address)
+        public void FindLocation(string address, string username)
         {
             const string Api = "AIzaSyCRQ2A5WO3oLqDrjyQhx6BRmf5KSgoo950";
-            const string url = "maps.googleapis.com/maps/api/geocode/json?address=";
+            const string url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
             const string url2 = "&key=" + Api;
             using (FittAppContext fitt = new FittAppContext())
             {
@@ -33,17 +30,21 @@ namespace FitnessProject.Web.Mvc.Models
                 }
                 double ladi = Convert.ToDouble(lad);
                 double loni = Convert.ToDouble(lon);
+              
+                var noGoZone = fitt.NoGoZones.SingleOrDefault(x => x.Address == address);
+                var user = fitt.Users.SingleOrDefault(x => x.Name == username);
                 foreach (var item in fitt.NoGoZones)
                 {
-                   // if(address!=item.Address)
-                   // {
-                        fitt.NoGoZones.Add(new NoGoZone { Address = address, Laditude = ladi, Longitude = loni });         
-                     //   utility.AddDangerZoneToJoin(address);
-                   // }
-                   // else
-                   // {
-                     //   utility.AddDangerZoneToJoin(address);
-                   // }
+                    if(address!=item.Address)
+                    {
+                        fitt.NoGoZones.Add(new NoGoZone { Address = address, Laditude = ladi, Longitude = loni });
+                        fitt.UserNoGoZones.Add(new UserNoGoZone { UserId = user.Id, NoGoZoneId = noGoZone.Id });               
+                    }
+                    else
+                    {
+                        fitt.UserNoGoZones.Add(new UserNoGoZone { UserId = user.Id, NoGoZoneId = noGoZone.Id });
+
+                    }
                 }
               
                 fitt.SaveChanges();
