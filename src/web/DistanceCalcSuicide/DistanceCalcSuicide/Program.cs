@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Xamarin.Essentials;
 
-namespace DistanceCalcSuicide
+namespace FitnessProject.Web.Calc
 {
     class Program
     {
