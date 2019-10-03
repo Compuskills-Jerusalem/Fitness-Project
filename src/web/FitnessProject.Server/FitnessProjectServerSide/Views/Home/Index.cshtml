@@ -1,0 +1,29 @@
+﻿
+@{
+
+    ViewBag.Title = "Home page";
+}
+
+<h1>FittApp</h1>
+
+<p>
+    <b> Welcome to fittApp. The high tech weight loss app.</b>
+</p>
+<div>
+    <p>
+        <b>
+            If you are a new user please click here
+        </b>
+    </p>
+    @Html.ActionLink("Add User", "Create","User")
+</div>
+
+<div>
+   <p>
+    <b>
+        If you have a account please click here
+    </b>
+  </p>
+
+    @Html.ActionLink("Login", "Login", "User")
+</div>
