@@ -1,0 +1,141 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using FitnessProjectServerSide.Models;
+
+namespace FitnessProjectServerSide.Controllers
+{
+    
+    public class UserController : Controller
+    {
+        List<User> users = null;
+      
+        // GET: User
+        public ActionResult Index()
+        {
+            using (FittAppContext fitt = new FittAppContext())
+            {
+                users = fitt.Users.ToList();
+            }
+            return View(users);
+                
+        }
+
+        /* GET: User/Details/5
+        public ActionResult Details(int id)
+        {
+
+            using (FittAppContext fitt = new FittAppContext())
+            {
+                var model = fitt.UserNoGoZones.FirstOrDefault(x => x.users.id == id);
+                return View(model);
+            }
+                
+        }*/
+        
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddUser(string name)
+        {
+            try
+            {
+                using (FittAppContext fitt = new FittAppContext())
+                {
+
+                    fitt.Users.Add(new User { Name = name });
+                    fitt.SaveChanges();
+                }
+                return RedirectToAction("GetAddress", "Location");
+            }
+            catch
+            {             
+            }
+            return View();
+        }
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult UserInfo(string name)
+        {
+          
+            using (var fitt = new FittAppContext())
+            {
+
+                //  e model item passed into the dictionary is of type 'System.Data.Entity.Infrastructure.DbQuery`1[<>f__AnonymousType3`3[System.String,System.Double,System.Double]]', but this dictionary requires a model item of type 'System.Collections.Generic.IEnumerable`1[FitnessProjectServerSide.Models.NoGoZone]'.
+                var model = from person in fitt.UserNoGoZones
+                                //  let p=person.UserNoGoZones.Address
+                            where person.users.Name == name
+
+                            select      person.NoGoZones.Address;
+                            
+                return View(model.AsEnumerable().ToList());
+              
+                
+            }
+
+             
+        }
+        // GET: User/Edit/5
+       public ActionResult Edit(string name)
+        {
+            using (FittAppContext fitt = new FittAppContext())
+            {
+                var model = fitt.Users.Where(x => x.Name == name);
+                return View(model);
+            }
+           
+        }
+
+        // POST: User/Edit/5
+       [HttpPost]
+        public ActionResult Change(User user)
+        {
+            using (FittAppContext fitt = new FittAppContext())
+            {
+               
+                try
+                {
+                  //  model.users.Name = user.Name;
+                    return RedirectToAction("Index");
+                }
+                catch
+                {                  
+                }
+                return View();
+            }
+             
+        }
+
+        /* GET: User/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: User/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }*/
+    }
+}
