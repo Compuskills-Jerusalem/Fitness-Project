@@ -30,34 +30,38 @@ namespace FitnessProjectServerSide.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult AddAddress (string address)
+        public ActionResult GetAddress (string address)
         {
             
             FindLocationWithGoogleApiModel googleApiModel = new FindLocationWithGoogleApiModel();
-            googleApiModel.FindLocation(address, User.Identity.Name);
+            googleApiModel.FindLocation(address, User.Identity.Name); 
+            googleApiModel.AddToJoinTable(address, User.Identity.Name);
             return RedirectToAction("UserInfo", "User");
         }
-          
-        
+
+
         [HttpGet]
         public ActionResult Delete(int id)
         {
             using (FittAppContext fitt = new FittAppContext())
             {
-                var model = fitt.UserNoGoZones.FirstOrDefault(x => x.NoGoZoneId== id);
-                return View(model);
+                var mode1 = fitt.UserNoGoZones.SingleOrDefault(x => x.NoGoZoneId == id);
+                return View(mode1);
             }
+            
         }
         [HttpPost]
-        public ActionResult Delete(int id, NoGoZone noGoZone)
+        public ActionResult Delete(int id,UserInfoModel userInfoModel)
         {
             using (FittAppContext fitt = new FittAppContext())
             {
-                var model = fitt.UserNoGoZones.FirstOrDefault(x => x.UserId == id);
+
+                var model = fitt.UserNoGoZones.SingleOrDefault(x => x.NoGoZoneId == userInfoModel.Id);
                 fitt.UserNoGoZones.Remove(model);
-                fitt.SaveChanges();
-                return RedirectToAction("UserInfo", "Location");
+
+            }
+              
+                return RedirectToAction("UserInfo", "User");
             }
         }
     }
-}

@@ -1,13 +1,13 @@
-﻿@model IEnumerable<FitnessProject.Web.Mvc.Models.UserInfoModel>
+﻿@model IEnumerable<FitnessProject.Web.Mvc.UserInfoModel>
 
 @{
     ViewBag.Title = "UserInfo";
 }
 
-<h2>UserInfo</h2>
+<h2>@User.Identity.Name</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("add new address", "GetAddress","Location")
 </p>
 <table class="table">
     <tr>
@@ -19,15 +19,15 @@
 
 @foreach (var item in Model) {
     <tr>
+      
         <td>
             @Html.DisplayFor(modelItem => item.Address)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+          
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
 }
-@Html.ActionLink("Add new address","GetAddress","Location")
+
 </table>

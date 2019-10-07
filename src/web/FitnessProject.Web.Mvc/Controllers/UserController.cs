@@ -26,17 +26,7 @@ namespace FitnessProject.Web.Mvc.Controllers
                 
         }
 
-        /* GET: User/Details/5
-        public ActionResult Details(int id)
-        {
-
-            using (FittAppContext fitt = new FittAppContext())
-            {
-                var model = fitt.UserNoGoZones.FirstOrDefault(x => x.users.id == id);
-                return View(model);
-            }
-                
-        }*/
+ 
         
         [HttpGet]
         public ActionResult Create()
@@ -107,69 +97,26 @@ namespace FitnessProject.Web.Mvc.Controllers
                             where noGo.Users.Name == User.Identity.Name
                             select new UserInfoModel
                             {
+                                Id=noGo.NoGoZoneId,
                                 Address = noGo.NoGoZones.Address
                             };
 
              
                             
-                return View(model.AsEnumerable().ToList());
-              
-                
+                return View(model.AsEnumerable().ToList());               
             }
 
              
         }
-        // GET: User/Edit/5
+        /* GET: User/Edit/5
        public ActionResult Edit(string name)
         {
-            using (FittAppContext fitt = new FittAppContext())
-            {
-                var model = fitt.Users.Where(x => x.Name == name);
-                return View(model);
-            }
-           
-        }
-
-        // POST: User/Edit/5
-       [HttpPost]
-        public ActionResult Change(User user)
-        {
-            using (FittAppContext fitt = new FittAppContext())
-            {
-               
-                try
-                {
-                  //  model.users.Name = user.Name;
-                    return RedirectToAction("Index");
-                }
-                catch
-                {                  
-                }
-                return View();
-            }
-             
-        }
-
-        /* GET: User/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: User/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                var model = User.Identity.Name;
+                return View(model);       
         }*/
+
+ 
+
+   
     }
 }

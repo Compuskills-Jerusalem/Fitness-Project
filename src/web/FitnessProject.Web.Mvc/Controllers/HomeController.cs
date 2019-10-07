@@ -7,8 +7,8 @@ using System.Web.Mvc;
 using DatabaseConn;
 using FitnessProject.Web.Mvc.Models;
 using FitnessProject.Web.Notifications;
-using FitnessProject.Web.Calc;
-using Xamarin.Essentials;
+//using FitnessProject.Web.Calc;
+//using Xamarin.Essentials;
 
 namespace FitnessProject.Web.Mvc.Controllers
 {
@@ -18,9 +18,10 @@ namespace FitnessProject.Web.Mvc.Controllers
         {
             ViewBag.Title = "Home Page";
             return View();
-        } 
-
-        [HttpPost]
+        }
+    }
+}
+        /*[HttpPost]
         public void RelayMessage(double Latitude, double Longitude, string userID)
         {
             Geolocation PersonsLocation = new Geolocation() { Latitude = Latitude, Longitude = Longitude };
@@ -46,3 +47,4 @@ namespace FitnessProject.Web.Mvc.Controllers
 
     }
 }
+*/
