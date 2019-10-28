@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace DatabaseConn
 {
-    class UserSensorAlert
+   public class UserSensorAlert
     {
+        public int UserSensorAlertID { get; set; }
+        public virtual UserSensor UserSensor { get; set; }
+        public virtual Alert Alert { get; set; }
     }
 }

@@ -51,11 +51,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alert.cs" />
+    <Compile Include="Contact.cs" />
     <Compile Include="FittAppContext.cs" />
     <Compile Include="NoGoZone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sensor.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserContact.cs" />
     <Compile Include="UserNoGoZone.cs" />
+    <Compile Include="UserSensor.cs" />
+    <Compile Include="UserSensorAlert.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace DatabaseConn
 {
-    class Contact
+   public class Contact
     {
+        public int ContactID { get; set; }
+        public string ContactName { get; set; }
+        public ICollection<UserContact> UserContacts { get; set; }
     }
 }

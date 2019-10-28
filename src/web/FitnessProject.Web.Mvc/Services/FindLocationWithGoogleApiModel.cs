@@ -38,11 +38,11 @@ namespace FitnessProject.Web.Mvc.Models
                     if(address!=item.Address)
                     {
                         fitt.NoGoZones.Add(new NoGoZone { Address = address, Laditude = ladi, Longitude = loni });
-                        fitt.UserNoGoZones.Add(new UserNoGoZone { UserId = user.Id, NoGoZoneId = noGoZone.Id });               
+                        fitt.UserNoGoZones.Add(new UserNoGoZone { UserId = user.UserID, NoGoZoneId = noGoZone.NoGoZoneID });               
                     }
                     else
                     {
-                        fitt.UserNoGoZones.Add(new UserNoGoZone { UserId = user.Id, NoGoZoneId = noGoZone.Id });
+                        fitt.UserNoGoZones.Add(new UserNoGoZone { UserId = user.UserID, NoGoZoneId = noGoZone.NoGoZoneID });
 
                     }
                 }
