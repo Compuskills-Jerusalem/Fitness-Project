@@ -11,7 +11,7 @@ using FitnessProject.Web.Notifications;
 
 namespace FitnessProject.Web.Mvc.Controllers
 {
-    public class HomeController : Controller
+    public class MobileGPSController : Controller
     {
         // GET: MobileGPS2
         public ActionResult Index()

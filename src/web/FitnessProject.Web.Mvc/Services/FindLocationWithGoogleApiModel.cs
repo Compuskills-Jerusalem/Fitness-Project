@@ -47,7 +47,7 @@ namespace FitnessProject.Web.Mvc.Models
             {
                 var user = fitt.Users.SingleOrDefault(x => x.Name == username);
                 var noGoZone = fitt.NoGoZones.FirstOrDefault(x => x.Address == address);
-                                 fitt.UserNoGoZones.Add(new UserNoGoZone { UserId = user.Id, NoGoZoneId = noGoZone.Id });
+                                 fitt.UserNoGoZones.Add(new UserNoGoZone { UserId = user.UserID, NoGoZoneId = noGoZone.NoGoZoneID });
                         fitt.SaveChanges();
                 }
             }
