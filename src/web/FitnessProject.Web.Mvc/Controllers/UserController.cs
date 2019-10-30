@@ -37,28 +37,21 @@ namespace FitnessProject.Web.Mvc.Controllers
         [HttpPost]
         public ActionResult Create(string name)
         {
-            try
+            using (FittAppContext fitt = new FittAppContext())
             {
-                using (FittAppContext fitt = new FittAppContext())
+                if (fitt.Users.Any(x => x.Name == name))
                 {
-                    if (fitt.Users.Any(x => x.Name == name))
-                    {
-                        ModelState.AddModelError("name", "That name is taken");
-                        return View();
-                    }
-                    else
-                    {
-                        fitt.Users.Add(new User { Name = name });
-                        fitt.SaveChanges();
-                        FormsAuthentication.SetAuthCookie(name, createPersistentCookie: true);
-                    }
+                    ModelState.AddModelError("name", "That name is taken");
+                    return View();
                 }
-              
+                else
+                {
+                    fitt.Users.Add(new User { Name = name });
+                    fitt.SaveChanges();
+                    FormsAuthentication.SetAuthCookie(name, createPersistentCookie: true);
+                    return RedirectToAction("GetAddress", "Location");
+                }
             }
-            catch
-            {             
-            }
-            return RedirectToAction("GetAddress", "Location");
         }
         [HttpGet]
         public ActionResult Login()
@@ -98,6 +91,7 @@ namespace FitnessProject.Web.Mvc.Controllers
                             select new UserInfoModel
                             {
                                 Id=noGo.NoGoZoneId,
+                                Address=noGo.NoGoZone.Address
                             };
 
              
