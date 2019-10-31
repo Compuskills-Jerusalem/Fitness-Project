@@ -10,7 +10,7 @@ namespace DatabaseConn
     public class FittAppContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<NoGoZone> NoGoZones { get; set; }
+        public DbSet<NoGoZones> NoGoZones { get; set; }
         public DbSet<UserNoGoZone> UserNoGoZones { get; set; }
         public DbSet<Alert> Alerts { get; set; }
         public DbSet<Contact> Contacts { get; set; }

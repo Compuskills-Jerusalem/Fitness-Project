@@ -12,11 +12,12 @@ namespace FitnessProject.Web.Mvc.Models
     {
         public void FindLocation(string address, string username)
         {
-            const string Api = "AIzaSyCRQ2A5WO3oLqDrjyQhx6BRmf5KSgoo950";
-            const string url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+           
+              
+                    const string Api = "AIzaSyCRQ2A5WO3oLqDrjyQhx6BRmf5KSgoo950";
+                const string url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
             const string url2 = "&key=" + Api + "&sensor = false";
-            using (FittAppContext fitt = new FittAppContext())
-            {
+           
                 var Result = new WebClient().DownloadString(url + address + url2);
             MapsApiResponse jsonResult = JsonConvert.DeserializeObject<MapsApiResponse>(Result);
 
@@ -30,17 +31,16 @@ namespace FitnessProject.Web.Mvc.Models
             }
             double ladi = Convert.ToDouble(lad);
             double loni = Convert.ToDouble(lon);
-            //    foreach (var item in fitt.NoGoZones)
-              //  {
-                //    if(address!=item.Address)
-                //    {
-                        fitt.NoGoZones.Add(new NoGoZone { Address = address, Laditude = ladi, Longitude = loni });
-                        fitt.SaveChanges();
-               //     }
+            using (FittAppContext fitt = new FittAppContext())
+            {
+
+                fitt.NoGoZones.Add(new NoGoZones { Address = address, Laditude = ladi, Longitude = loni });
+                    fitt.SaveChanges();
+                  
                 }
-                         
-            }
-        //}
+            }           
+            
+       
       public  void AddToJoinTable(string address, string username)
         {
             using (FittAppContext fitt = new FittAppContext())
