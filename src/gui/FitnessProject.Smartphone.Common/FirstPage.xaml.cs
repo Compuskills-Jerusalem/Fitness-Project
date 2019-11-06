@@ -32,7 +32,7 @@ namespace PN_XAML
             base.OnAppearing();
         }
         
-
+        
         void btnLocation_Clicked(object sender, System.EventArgs e)
         {
             
@@ -48,7 +48,7 @@ namespace PN_XAML
                     {
                         int userID = 1;
                         
-                        PostRequest("https://ptsv2.com/t/z0u0o-1573035817/post", location.Latitude.ToString(), location.Longitude.ToString(), userID.ToString());
+                        PostRequest("https://ptsv2.com/t/z0u0o-1573035817/post", location.Latitude.ToString(), location.Longitude.ToString(), LoginManager.CurrentUser.Username);
 
                     }
                     await Task.Delay(2000);
@@ -97,7 +97,7 @@ namespace PN_XAML
             {
                 {new KeyValuePair<string, string>(key: "Latitude", value: latitude) },
                 {new KeyValuePair<string, string>(key: "Longitude", value: longitude) },
-                {new KeyValuePair<string, string>(key: "UserId", value: userId) }
+                {new KeyValuePair<string, string>(key: "EmailAddress", value: userId) }
             };
             FormUrlEncodedContent q = new FormUrlEncodedContent(queries);
             using (HttpClient client = new HttpClient())

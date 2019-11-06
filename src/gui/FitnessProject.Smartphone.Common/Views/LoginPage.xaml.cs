@@ -20,22 +20,24 @@ namespace PN_XAML.Views
         {
             InitializeComponent();
         }
-        public User CurrentUser { get; set; }
+        //instance property must be static
+        //public User CurrentUser { get; set; }
         public async void SignInProcedure(object sender, EventArgs e)
         {
             /*PN_XAML.Models.User user*/
-            CurrentUser = new User(Username: Entry_Username.Text, Password: Entry_Password.Text);
-            if (CurrentUser.CheckInformation())
+            LoginManager.CurrentUser = new User(Username: Entry_Username.Text, Password: Entry_Password.Text);
+            if (LoginManager.CurrentUser.CheckInformation())
             {
                 var client = new HttpClient();
                 var values = new Dictionary<string, string>
                 {
-                    {"Username",CurrentUser.Username },
-                    {"Password", CurrentUser.Password }
+                    {"name",LoginManager.CurrentUser.Username },
+                    //{"name", "bob" }
+                    //{"Password", LoginManager.CurrentUser.Password }
                 };
                 var content = new FormUrlEncodedContent(values);
                 var a = new HttpClient();
-                var response = await a.PostAsync("https://ptsv2.com/t/z0u0o-1573035817/post", content);
+                var response = await a.PostAsync("http://10.0.2.2:55587/user/login", content);
                 var responseString = await response.Content.ReadAsStringAsync();
 
                 await DisplayAlert("Login", "Login Success", "Ok");
