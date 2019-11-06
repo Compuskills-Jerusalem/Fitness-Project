@@ -4,6 +4,7 @@ namespace FitnessProject.Web.Mvc
 {
     public class MessageRelayer
     {
+       
         public void RelayMessage(ISensor SensorType)
         {
             

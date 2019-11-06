@@ -34,7 +34,7 @@ namespace FitnessProject.Web.Mvc.Models
               //  {
                 //    if(address!=item.Address)
                 //    {
-                        fitt.NoGoZones.Add(new NoGoZone { Address = address, Laditude = ladi, Longitude = loni });
+                        fitt.NoGoZones.Add(new NoGoZone { Address = address, Latitude = ladi, Longitude = loni });
                         fitt.SaveChanges();
                //     }
                 }
