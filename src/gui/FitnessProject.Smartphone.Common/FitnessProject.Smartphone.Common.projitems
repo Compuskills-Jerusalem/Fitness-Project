@@ -44,6 +44,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ThirdPage.xaml.cs">
       <DependentUpon>ThirdPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)UserManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\LoginPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
