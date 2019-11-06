@@ -19,7 +19,7 @@ namespace FitnessProject.Web.Mvc.Models
                             select new
                             {
                                 person.NoGoZone.Address,
-                                person.NoGoZone.Laditude,
+                                person.NoGoZone.Latitude,
                                 person.NoGoZone.Longitude,
                             };
                 return model;

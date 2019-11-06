@@ -9,7 +9,11 @@ namespace DatabaseConn
    public class UserSensor
     {
         public int UserSensorID { get; set; }
+
+        public int UserID { get; set; }
         public virtual User User { get; set; }
+
+        public int SensorID { get; set; }
         public virtual Sensor Sensor { get; set; }
         public ICollection<UserSensorAlert> UserSensorAlerts { get; set; }
     }

@@ -19,7 +19,7 @@ namespace FitnessProjectServerSide.Controllers
         }
 
         [HttpPost]
-        public void RelayMessage(Geolocation PersonsLocation)
+        public void RelayMessage(Geolocation PersonsLocation, string EmailAddress)
         {
 
             GpsSensor gpsSensor = new GpsSensor(PersonsLocation);
@@ -27,11 +27,6 @@ namespace FitnessProjectServerSide.Controllers
             relayer.RelayMessage(gpsSensor);
 
         }
-        [HttpGet]
-        public void Mock()
-        {
-            
-
-        }
+       
     } 
 }
