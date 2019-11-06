@@ -9,7 +9,11 @@ namespace DatabaseConn
    public class UserSensorAlert
     {
         public int UserSensorAlertID { get; set; }
+
+        public int UserSensorID { get; set; }
         public virtual UserSensor UserSensor { get; set; }
+
+        public int AlertID { get; set; }
         public virtual Alert Alert { get; set; }
     }
 }
