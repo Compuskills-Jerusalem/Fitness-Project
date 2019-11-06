@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PN_XAML.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +11,7 @@ namespace PN_XAML
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new LoginPage()/*,new MainPage()*/);
         }
 
         protected override void OnStart()
