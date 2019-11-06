@@ -34,7 +34,7 @@ namespace FitnessProject.Web.Mvc.Models
             using (FittAppContext fitt = new FittAppContext())
             {
 
-                fitt.NoGoZones.Add(new NoGoZones { Address = address, Laditude = ladi, Longitude = loni });
+                fitt.NoGoZones.Add(new NoGoZones { Address = address, Latitude = ladi, Longitude = loni });
                     fitt.SaveChanges();
                   
                 }

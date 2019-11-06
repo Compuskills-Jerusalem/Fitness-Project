@@ -41,4 +41,3 @@ namespace FitnessProject.Web.Mvc
         }
     }
 }
-}

@@ -181,7 +181,6 @@
     <Compile Include="GpsSensor.cs" />
     <Compile Include="Interfaces\IMessage.cs" />
     <Compile Include="Interfaces\ISensor.cs" />
-    <Compile Include="MessageRelayer.cs" />
     <Compile Include="MessageTargetList.cs" />
     <Compile Include="Services\FindLocationWithGoogleApiModel.cs" />
     <Compile Include="Geolocation.cs" />
