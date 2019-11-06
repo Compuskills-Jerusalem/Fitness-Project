@@ -31,7 +31,7 @@ namespace PN_XAML
         {
             base.OnAppearing();
         }
-
+        
 
         void btnLocation_Clicked(object sender, System.EventArgs e)
         {
@@ -47,8 +47,8 @@ namespace PN_XAML
                     if (location != null)
                     {
                         int userID = 1;
-
-                        PostRequest("https://ptsv2.com/t/3b1jh-1569316876/post", location.Latitude.ToString(), location.Longitude.ToString(), userID.ToString());
+                        
+                        PostRequest("https://ptsv2.com/t/z0u0o-1573035817/post", location.Latitude.ToString(), location.Longitude.ToString(), userID.ToString());
 
                     }
                     await Task.Delay(2000);

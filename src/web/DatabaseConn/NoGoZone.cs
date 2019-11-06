@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 namespace DatabaseConn
 {
-    public class NoGoZone
+    public class NoGoZones
     {
+        [Key]
         public int NoGoZoneID { get; set; }
         public ICollection<UserNoGoZone> NoGoZoneId { get; set; }
         public string Name { get; set; }
