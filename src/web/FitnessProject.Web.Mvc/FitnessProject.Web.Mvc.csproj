@@ -185,6 +185,7 @@
     </Compile>
     <Compile Include="Models\Adresses.cs" />
     <Compile Include="Models\Data.cs" />
+    <Compile Include="Services\FindUserId.cs" />
     <Compile Include="Services\ILocation.cs" />
     <Compile Include="Models\Query.cs" />
     <Compile Include="Models\UserInfo.cs" />
