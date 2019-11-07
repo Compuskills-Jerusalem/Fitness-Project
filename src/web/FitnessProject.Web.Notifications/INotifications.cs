@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FitnessProject.Web.Notifications
 {
-    interface INotifications
+    public interface INotifications
     {
         void Send(MessageData messageData);
     }
