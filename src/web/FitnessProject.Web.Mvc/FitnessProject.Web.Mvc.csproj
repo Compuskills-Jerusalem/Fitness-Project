@@ -189,7 +189,6 @@
     </Compile>
     <Compile Include="Models\Adresses.cs" />
     <Compile Include="Models\Data.cs" />
-    <Compile Include="Services\FindUserId.cs" />
     <Compile Include="Services\ILocation.cs" />
     <Compile Include="Models\Query.cs" />
     <Compile Include="Models\UserInfo.cs" />
@@ -245,14 +244,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Location\Index.cshtml" />
     <Content Include="Views\Location\GetAddress.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\UserInfo.cshtml" />
-    <Content Include="Views\Location\Delete1.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -13,20 +13,6 @@ namespace FitnessProject.Web.Mvc.Controllers
     
     public class UserController : Controller
     {
-        List<User> users = null;
-      
-        // GET: User
-        public ActionResult Index()
-        {
-            using (FittAppContext fitt = new FittAppContext())
-            {
-                users = fitt.Users.ToList();
-            }
-            return View(users);
-                
-        }
-
- 
         
         [HttpGet]
         public ActionResult Create()
@@ -90,7 +76,7 @@ namespace FitnessProject.Web.Mvc.Controllers
                             where noGo.User.Name == User.Identity.Name
                             select new UserInfoModel
                             {
-                                Id=noGo.NoGoZoneId,
+                                Id=noGo.UserNoGoZoneID,
                                 Address=noGo.NoGoZone.Address
                             };
 
@@ -98,18 +84,31 @@ namespace FitnessProject.Web.Mvc.Controllers
                             
                 return View(model.AsEnumerable().ToList());               
             }
-
-             
+          
         }
-        /* GET: User/Edit/5
-       public ActionResult Edit(string name)
+        [HttpGet]
+        public ActionResult Delete(int id)
         {
-                var model = User.Identity.Name;
-                return View(model);       
-        }*/
+            using (FittAppContext fitt = new FittAppContext())
+            {
 
- 
+                var mode1 = fitt.UserNoGoZones.SingleOrDefault(x => x.UserNoGoZoneID == id);
+                return View(mode1);
+            }
+        }
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            using (FittAppContext fitt = new FittAppContext())
+            {
 
-   
+                var userModel = fitt.UserNoGoZones.SingleOrDefault(x => x.UserNoGoZoneID == id);
+                fitt.UserNoGoZones.Remove(userModel);
+                fitt.SaveChanges();
+
+            }
+
+            return RedirectToAction("UserInfo", "User");
+        }
     }
 }
