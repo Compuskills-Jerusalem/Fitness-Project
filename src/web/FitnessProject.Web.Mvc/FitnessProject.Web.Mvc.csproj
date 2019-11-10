@@ -181,7 +181,6 @@
     <Compile Include="GpsSensor.cs" />
     <Compile Include="Interfaces\IMessage.cs" />
     <Compile Include="Interfaces\ISensor.cs" />
-    <Compile Include="MessageRelayer.cs" />
     <Compile Include="MessageTargetList.cs" />
     <Compile Include="Services\FindLocationWithGoogleApiModel.cs" />
     <Compile Include="Geolocation.cs" />
@@ -245,14 +244,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Location\Index.cshtml" />
     <Content Include="Views\Location\GetAddress.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\UserInfo.cshtml" />
-    <Content Include="Views\Location\Delete1.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

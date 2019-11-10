@@ -14,17 +14,7 @@ namespace FitnessProjectServerSide.Controllers
     [Authorize]
     public class LocationController : Controller
     {
-        List<NoGoZones> noGos = null;
-
-        // GET: Location
-        public ActionResult Index()
-        {
-            using (var fitt = new FittAppContext())
-            {
-                noGos = fitt.NoGoZones.ToList();
-            }
-            return View(noGos);
-        }
+  
         [HttpGet]
         public ActionResult GetAddress()
         {
@@ -50,30 +40,6 @@ namespace FitnessProjectServerSide.Controllers
         }
 
 
-        [HttpGet]
-        public ActionResult Delete(int id, int userId)
-        {
-            using (FittAppContext fitt = new FittAppContext())
-            { 
-                
-                var mode1 = fitt.UserNoGoZones.SingleOrDefault(x => x.NoGoZoneId == id && x.UserId == userId);
-                return View(mode1);
-            }
-            
-        }
-        [HttpPost]
-        public ActionResult Delete1(int userId,int noGoId)
-        {
-            using (FittAppContext fitt = new FittAppContext())
-            {
-             
-                var userModel = fitt.UserNoGoZones.SingleOrDefault(x => x.NoGoZoneId ==noGoId&& x.UserId == userId); 
-                fitt.UserNoGoZones.Remove(userModel);
-                fitt.SaveChanges();
-
-            }
-              
-                return RedirectToAction("UserInfo", "User");
-            }
+  
         }
     }

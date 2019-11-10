@@ -15,6 +15,7 @@ namespace FitnessProject.Web.Calc
                 Location DZone = new Location(DeathZoneItem.Laditude, DeathZoneItem.Longitude);
                 var distance = Location.CalculateDistance(User, DZone, DistanceUnits.Kilometers);
                 if (distance < 0.1)
+
                 {
                     EMailNotification n = new EMailNotification();
                     MessageData messageData = new MessageData()
