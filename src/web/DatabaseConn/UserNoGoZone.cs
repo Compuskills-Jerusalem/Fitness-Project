@@ -8,7 +8,7 @@ namespace DatabaseConn
         public virtual User User { get; set; }
         public int NoGoZoneID { get; set; }
         public virtual NoGoZone NoGoZones { get; set; }
-       public virtual LocationName LocationName { get; set; }
+
 
     }
 }

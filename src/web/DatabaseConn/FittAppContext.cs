@@ -18,7 +18,7 @@ namespace DatabaseConn
         public DbSet<UserSensor> UserSensors { get; set; }
         public DbSet<UserContact> UserContacts { get; set; }
         public DbSet<UserSensorAlert> UserSensorAlerts { get; set; }
-        public DbSet<LocationName> LocationNames { get; set; }
+   
 
 
 

@@ -35,20 +35,20 @@ namespace FitnessProject.Web.Mvc.Models
             using (FittAppContext fitt = new FittAppContext())
             {
 
-                fitt.NoGoZones.Add(new NoGoZones { Address = address, Latitude = ladi, Longitude = loni });
+                fitt.NoGoZones.Add(new NoGoZone { Address = address, Latitude = ladi, Longitude = loni });
                     fitt.SaveChanges();
                   
                 }
             }           
             
        
-      public  void AddToJoinTable(string address, string username,string placeName)
+      public  void AddToJoinTable(string address, string username)
         {
             using (FittAppContext fitt = new FittAppContext())
             {
                 var user = fitt.Users.SingleOrDefault(x => x.Name == username);
                 var noGoZone = fitt.NoGoZones.FirstOrDefault(x => x.Address == address);
-                                 fitt.UserNoGoZones.Add(new UserNoGoZone { UserId = user.UserID, NoGoZoneId = noGoZone.NoGoZoneID ,PlaceName=placeName});
+                                 fitt.UserNoGoZones.Add(new UserNoGoZone { UserId = user.UserID, NoGoZoneID = noGoZone.NoGoZoneID });
                         fitt.SaveChanges();
                 }
             }

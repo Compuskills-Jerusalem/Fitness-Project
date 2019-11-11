@@ -45,14 +45,14 @@ namespace FitnessProject.Web.Mvc.Controllers
 
         }
 
-        public IQueryable<NoGoZones> GetNoGoZonesByEmail(string EmailAddress)
+        public IQueryable<NoGoZone> GetNoGoZonesByEmail(string EmailAddress)
         {
             using (FittAppContext FAC = new FittAppContext())
             {
                 var noGoZones = from userContact in FAC.UserContacts
                                 where userContact.ContactValue == EmailAddress
                                 from userNoGoZone in userContact.User.UserNoGoZones
-                                select userNoGoZone.NoGoZone;
+                                select userNoGoZone.NoGoZones;
 
                 return noGoZones.ToList().AsQueryable();
             }
@@ -75,9 +75,9 @@ namespace FitnessProject.Web.Mvc.Controllers
      //      Xamarin.Essentials.Location PersonsLocation = new Xamarin.Essentials.Location(latitude, longitude);
 
             MessageTargetList targetList = GpsSensorTargetList(emailAddress);
-            GpsSensor gpsSensor = new GpsSensor(PersonsLocation, GetNoGoZonesByEmail(emailAddress));
-            bool signal = gpsSensor.ShouldAlertUser();
-            if (signal == true)
+          //  GpsSensor gpsSensor = new GpsSensor(PersonsLocation, GetNoGoZonesByEmail(emailAddress));
+       //     bool signal = gpsSensor.ShouldAlertUser();
+           // if (signal == true)
             {
                 foreach (var item in targetList.MessageTypeTargetList)
                 {

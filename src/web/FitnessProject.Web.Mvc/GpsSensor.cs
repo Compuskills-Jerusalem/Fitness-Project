@@ -17,7 +17,7 @@ namespace FitnessProject.Web.Mvc
             return DistanceIsLessThanThreshold;
         }
 
-        public GpsSensor(Location personsLocation, IQueryable<NoGoZones> noGoZones)
+        public GpsSensor(Location personsLocation, IQueryable<NoGoZone> noGoZones)
         {
             //public static void CalcPlace(IEnumerable<NoGoZone> NoGoUsers, Location User)
             //{sh

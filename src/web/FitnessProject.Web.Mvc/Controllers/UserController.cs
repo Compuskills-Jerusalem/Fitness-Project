@@ -78,7 +78,7 @@ namespace FitnessProject.Web.Mvc.Controllers
                             {
                                 Id = noGo.UserNoGoZoneID,
                                 Address = noGo.NoGoZones.Address,
-                                PlaceName = noGo.LocationName.PlaceName
+                                PlaceName = noGo.NoGoZones.PlaceName
                             };
 
              
