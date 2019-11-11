@@ -1,11 +1,14 @@
-﻿namespace DatabaseConn
+﻿using System.Collections.Generic;
+namespace DatabaseConn
 {
     public class UserNoGoZone
     {
         public int UserNoGoZoneID { get; set; }
         public int UserId { get; set; }
         public virtual User User { get; set; }
-        public int NoGoZoneId { get; set; }
-        public virtual NoGoZones NoGoZone { get; set; }
+        public int NoGoZoneID { get; set; }
+        public virtual NoGoZone NoGoZones { get; set; }
+       public virtual LocationName LocationName { get; set; }
+
     }
 }

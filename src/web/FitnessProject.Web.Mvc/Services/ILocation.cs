@@ -9,7 +9,8 @@ namespace FitnessProject.Web.Mvc.Models
     interface ILocation
     {
         void FindLocation(string address,string userName);
-        void AddToJoinTable(string address, string username);
+        void AddToJoinTable(string address, string username,string placeName);
+      
        // void AvoidRepeating(string address, string username);
     }
 }

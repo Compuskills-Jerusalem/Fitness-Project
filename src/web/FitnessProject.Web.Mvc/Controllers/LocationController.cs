@@ -21,19 +21,19 @@ namespace FitnessProjectServerSide.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult GetAddress (string address)
+        public ActionResult GetAddress (string address, string name)
         {  
             FindLocationWithGoogleApiModel googleApiModel = new FindLocationWithGoogleApiModel();
            using(FittAppContext fitt=new FittAppContext())
             {
                 if(fitt.NoGoZones.Any(x=>x.Address==address))
                 {
-                    googleApiModel.AddToJoinTable(address, User.Identity.Name);
+                    googleApiModel.AddToJoinTable(address, User.Identity.Name,name);
                 }
                 else
                 {
                     googleApiModel.FindLocation(address, User.Identity.Name);
-                    googleApiModel.AddToJoinTable(address, User.Identity.Name);
+                    googleApiModel.AddToJoinTable(address, User.Identity.Name,name);
                 }
             } 
             return RedirectToAction("UserInfo", "User");

@@ -72,7 +72,7 @@ namespace FitnessProject.Web.Mvc.Controllers
         public void RelayMessage(double latitude, double longitude, string emailAddress)
         {
 
-            Xamarin.Essentials.Location PersonsLocation = new Xamarin.Essentials.Location(latitude, longitude);
+     //      Xamarin.Essentials.Location PersonsLocation = new Xamarin.Essentials.Location(latitude, longitude);
 
             MessageTargetList targetList = GpsSensorTargetList(emailAddress);
             GpsSensor gpsSensor = new GpsSensor(PersonsLocation, GetNoGoZonesByEmail(emailAddress));

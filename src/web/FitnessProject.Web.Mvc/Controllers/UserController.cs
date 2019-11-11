@@ -76,8 +76,9 @@ namespace FitnessProject.Web.Mvc.Controllers
                             where noGo.User.Name == User.Identity.Name
                             select new UserInfoModel
                             {
-                                Id=noGo.UserNoGoZoneID,
-                                Address=noGo.NoGoZone.Address
+                                Id = noGo.UserNoGoZoneID,
+                                Address = noGo.NoGoZones.Address,
+                                PlaceName = noGo.LocationName.PlaceName
                             };
 
              
@@ -97,11 +98,12 @@ namespace FitnessProject.Web.Mvc.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, string name)
         {
+            name = User.Identity.Name;
             using (FittAppContext fitt = new FittAppContext())
             {
-
+                // var nogoZone = fitt.NoGoZones.Any(X => X.NoGoZoneID == id);
                 var userModel = fitt.UserNoGoZones.SingleOrDefault(x => x.UserNoGoZoneID == id);
                 fitt.UserNoGoZones.Remove(userModel);
                 fitt.SaveChanges();

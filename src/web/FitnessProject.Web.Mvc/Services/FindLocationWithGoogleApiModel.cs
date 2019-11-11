@@ -10,11 +10,12 @@ namespace FitnessProject.Web.Mvc.Models
 {
     public class FindLocationWithGoogleApiModel : ILocation
     {
+        const string Api = "AIzaSyCRQ2A5WO3oLqDrjyQhx6BRmf5KSgoo950";
         public void FindLocation(string address, string username)
         {
            
               
-                    const string Api = "AIzaSyCRQ2A5WO3oLqDrjyQhx6BRmf5KSgoo950";
+                  //  const string Api = "AIzaSyCRQ2A5WO3oLqDrjyQhx6BRmf5KSgoo950";
                 const string url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
             const string url2 = "&key=" + Api + "&sensor = false";
            
@@ -41,16 +42,19 @@ namespace FitnessProject.Web.Mvc.Models
             }           
             
        
-      public  void AddToJoinTable(string address, string username)
+      public  void AddToJoinTable(string address, string username,string placeName)
         {
             using (FittAppContext fitt = new FittAppContext())
             {
                 var user = fitt.Users.SingleOrDefault(x => x.Name == username);
                 var noGoZone = fitt.NoGoZones.FirstOrDefault(x => x.Address == address);
-                                 fitt.UserNoGoZones.Add(new UserNoGoZone { UserId = user.UserID, NoGoZoneId = noGoZone.NoGoZoneID });
+                                 fitt.UserNoGoZones.Add(new UserNoGoZone { UserId = user.UserID, NoGoZoneId = noGoZone.NoGoZoneID ,PlaceName=placeName});
                         fitt.SaveChanges();
                 }
             }
+      
+   
+    
         }
   
 

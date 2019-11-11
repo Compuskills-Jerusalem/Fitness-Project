@@ -7,6 +7,6 @@ namespace FitnessProject.Web.Mvc.Models
     {
         [Required]
         public string Address { get; set; }
-       
+       public string PlaceName { get; set; }
     }
 }
