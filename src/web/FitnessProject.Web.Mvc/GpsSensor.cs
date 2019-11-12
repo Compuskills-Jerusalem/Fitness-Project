@@ -1,7 +1,10 @@
 ﻿using DatabaseConn;
 using FitnessProject.Web.Mvc.Interfaces;
 using System.Linq;
-using Xamarin.Essentials;
+using System.Device;
+using System.Device.Location;
+using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 namespace FitnessProject.Web.Mvc
 {
@@ -17,15 +20,19 @@ namespace FitnessProject.Web.Mvc
             return DistanceIsLessThanThreshold;
         }
 
-        public GpsSensor(Location personsLocation, IQueryable<NoGoZone> noGoZones)
+        public GpsSensor(GeoCoordinate personsLocation, IQueryable<NoGoZone> noGoZones)
         {
             //public static void CalcPlace(IEnumerable<NoGoZone> NoGoUsers, Location User)
             //{sh
 
+
             foreach (var noGoZoneItem in noGoZones)
             {
-                Location DZone = new Location(noGoZoneItem.Latitude, noGoZoneItem.Longitude);
-                var distance = Location.CalculateDistance(personsLocation, DZone, DistanceUnits.Kilometers);
+                GeoCoordinate DZone = new GeoCoordinate(noGoZoneItem.Latitude, noGoZoneItem.Longitude);
+
+
+                double distance = DZone.GetDistanceTo(personsLocation);
+
                 if (distance < THRESHOLD)
                 {
                     DistanceIsLessThanThreshold = true;
