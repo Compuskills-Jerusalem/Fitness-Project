@@ -4,6 +4,8 @@ namespace FitnessProject.Web.Mvc.Models
 {
     public class Users
     {        [Required]
-            public string Name { get; set; }    
+            public string Name { get; set; }  
+               [Required]    
+        public string Email { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using DatabaseConn;
 using FitnessProject.Web.Mvc;
 using FitnessProject.Web.Mvc.Models;
 using System.Web.Security;
+using FitnessProject.Web.Mvc.Services;
 
 namespace FitnessProjectServerSide.Controllers
 {
@@ -21,24 +22,25 @@ namespace FitnessProjectServerSide.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult GetAddress (string address, string name,string place)
+        public ActionResult GetAddress ( string name,string address,string place)
         {  
             FindLocationWithGoogleApiModel googleApiModel = new FindLocationWithGoogleApiModel();
-           using(FittAppContext fitt=new FittAppContext())
-            {
-                if(fitt.NoGoZones.Any(x=>x.Address==address))
+            AddRemoveFromDbModel addRemoveFromDb = new AddRemoveFromDbModel();
+          
+                using (FittAppContext fitt = new FittAppContext())
                 {
-                    googleApiModel.AddToJoinTable( User.Identity.Name,name);
-                
+                    if (fitt.NoGoZones.Any(x => x.Address == address))
+                    {
+                        addRemoveFromDb.AddToJoinTable(User.Identity.Name, address);                   
+                    }
+                    else
+                    {
+                        googleApiModel.FindLocation(address, User.Identity.Name,place);
+                        addRemoveFromDb.AddToJoinTable(User.Identity.Name, address);
+                       
+                    }
                 }
-                else
-                {
-                    googleApiModel.FindLocation(address, User.Identity.Name);
-                    googleApiModel.AddToJoinTable( User.Identity.Name,name);
-                    fitt.NoGoZones.Add(new NoGoZone { PlaceName = place });
-                    fitt.SaveChanges();
-                }
-            } 
+            
             return RedirectToAction("UserInfo", "User");
         }
 

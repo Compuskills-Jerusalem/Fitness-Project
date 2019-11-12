@@ -4,10 +4,10 @@
     ViewBag.Title = "UserInfo";
 }
 
-<h2>UserInfo</h2>
-
+<h2>@User.Identity.Name</h2>
+@Html.ActionLink("see user details", "AccountDetails")
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("add new location", "GetAddress","Location")
 </p>
 <table class="table">
     <tr>
@@ -17,6 +17,7 @@
         <th>
             @Html.DisplayNameFor(model => model.PlaceName)
         </th>
+       
         <th></th>
     </tr>
 
@@ -28,9 +29,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.PlaceName)
         </td>
+       
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+          
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>

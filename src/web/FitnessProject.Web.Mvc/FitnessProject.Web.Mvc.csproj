@@ -182,6 +182,9 @@
     <Compile Include="Interfaces\IMessage.cs" />
     <Compile Include="Interfaces\ISensor.cs" />
     <Compile Include="MessageTargetList.cs" />
+    <Compile Include="Models\AccountDetails.cs" />
+    <Compile Include="Models\DeleteModel.cs" />
+    <Compile Include="Services\AddRemoveFromDbModel.cs" />
     <Compile Include="Services\DistanceCalculator.cs" />
     <Compile Include="Services\FindLocationWithGoogleApiModel.cs" />
     <Compile Include="Geolocation.cs" />
@@ -250,6 +253,9 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\UserInfo.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\User\AccountDetails.cshtml" />
+    <Content Include="Views\User\EditAccountDetails.cshtml" />
+    <Content Include="Views\User\NewUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

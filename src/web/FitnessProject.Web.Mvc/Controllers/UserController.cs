@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
+﻿
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FitnessProject.Web.Mvc.Models;
 using System.Web.Security;
 using DatabaseConn;
+using FitnessProject.Web.Mvc.Services;
 
 namespace FitnessProject.Web.Mvc.Controllers
 {
-    
+
     public class UserController : Controller
     {
-        
+
         [HttpGet]
         public ActionResult Create()
         {
@@ -21,23 +20,27 @@ namespace FitnessProject.Web.Mvc.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(string name)
+        public ActionResult Create(string name,string email)
         {
-            using (FittAppContext fitt = new FittAppContext())
+            if (ModelState.IsValid)
             {
-                if (fitt.Users.Any(x => x.Name == name))
+                using (FittAppContext fitt = new FittAppContext())
                 {
-                    ModelState.AddModelError("name", "That name is taken");
-                    return View();
-                }
-                else
-                {
-                    fitt.Users.Add(new User { Name = name });
-                    fitt.SaveChanges();
-                    FormsAuthentication.SetAuthCookie(name, createPersistentCookie: true);
-                    return RedirectToAction("GetAddress", "Location");
+                    if (fitt.Users.Any(x => x.Name == name))
+                    {
+                        ModelState.AddModelError("name", "That name is taken");
+                        return View();
+                    }
+                    else
+                    {
+                        fitt.Users.Add(new User { Name = name ,EMail=email});
+                        fitt.SaveChanges();
+                        FormsAuthentication.SetAuthCookie(name, createPersistentCookie: true);
+
+                    }
                 }
             }
+            return RedirectToAction("GetAddress", "Location");
         }
         [HttpGet]
         public ActionResult Login()
@@ -48,6 +51,7 @@ namespace FitnessProject.Web.Mvc.Controllers
         [HttpPost]
         public ActionResult Login(string name)
         {
+
             using (var fitt = new FittAppContext())
             {
                 var user = fitt.Users.FirstOrDefault(x => x.Name == name);
@@ -67,7 +71,7 @@ namespace FitnessProject.Web.Mvc.Controllers
         [HttpGet]
         public ActionResult UserInfo()
         {
-            
+
             using (var fitt = new FittAppContext())
             {
                 UserInfoModel userInfo = new UserInfoModel();
@@ -78,14 +82,55 @@ namespace FitnessProject.Web.Mvc.Controllers
                             {
                                 Id = noGo.UserNoGoZoneID,
                                 Address = noGo.NoGoZones.Address,
-                                PlaceName = noGo.NoGoZones.PlaceName
+                                PlaceName = noGo.NoGoZones.PlaceName,
+
                             };
 
-             
-                            
-                return View(model.AsEnumerable().ToList());               
+                return View(model.AsEnumerable().ToList());
             }
-          
+        }
+        [HttpGet]
+        public ActionResult AccountDetails()
+        {
+            using (FittAppContext fitt = new FittAppContext())
+            {
+                AccountDetails accountDetails = new AccountDetails();
+                var model = from client in fitt.Users
+                            where client.Name == User.Identity.Name
+                            select new AccountDetails
+                            {
+                                UserId = client.UserID,
+                                UserName = client.Name,
+                                Email = client.EMail
+                            };
+                return View(model);
+            }
+        }
+        [HttpGet]
+        public ActionResult EditAccountDetails(int id)
+        {
+
+            using (FittAppContext fitt = new FittAppContext())
+            {
+                var model = fitt.Users.FirstOrDefault(x => x.UserID == id);
+                return View(model);
+            }
+        }
+        [HttpPost]
+        public ActionResult EditAccountDetails(string name, int id, User user)
+        {
+            name = User.Identity.Name;
+            if (ModelState.IsValid)
+            {
+                using (FittAppContext fitt = new FittAppContext())
+                {
+                    var model = fitt.Users.FirstOrDefault(x => x.UserID == id);
+                    model.EMail = user.EMail;
+                    model.Name = user.Name;
+                    fitt.SaveChanges();
+                }
+            }
+            return RedirectToAction("UserInfo");
         }
         [HttpGet]
         public ActionResult Delete(int id)
@@ -103,14 +148,27 @@ namespace FitnessProject.Web.Mvc.Controllers
             name = User.Identity.Name;
             using (FittAppContext fitt = new FittAppContext())
             {
-                // var nogoZone = fitt.NoGoZones.Any(X => X.NoGoZoneID == id);
-                var userModel = fitt.UserNoGoZones.SingleOrDefault(x => x.UserNoGoZoneID == id);
-                fitt.UserNoGoZones.Remove(userModel);
-                fitt.SaveChanges();
+                DeleteModel deleteModel = new DeleteModel();
+                var model = fitt.UserNoGoZones.Find(id);
+                var mod4el = model.NoGoZoneID;
+                var mo = fitt.NoGoZones.Find(mod4el);
+                var m = fitt.UserNoGoZones.Where(x => x.NoGoZoneID == mod4el).Count();
+                if (m > 2)
+                {
+                    fitt.UserNoGoZones.Remove(model);
+                    fitt.SaveChanges();
+                }
+                else
+                {
+                    fitt.UserNoGoZones.Remove(model);
+                    fitt.NoGoZones.Remove(mo);
+                    fitt.SaveChanges();
+                }
 
+
+
+                return RedirectToAction("UserInfo");
             }
-
-            return RedirectToAction("UserInfo", "User");
         }
     }
 }
