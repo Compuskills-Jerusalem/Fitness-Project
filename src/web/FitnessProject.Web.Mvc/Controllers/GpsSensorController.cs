@@ -7,7 +7,8 @@ using System.Data.Entity;
 using FitnessProject.Web.Mvc;
 using DatabaseConn;
 using FitnessProject.Web.Notifications;
-using Xamarin.Essentials;
+
+using System.Device.Location;
 
 namespace FitnessProject.Web.Mvc.Controllers
 {
@@ -72,12 +73,13 @@ namespace FitnessProject.Web.Mvc.Controllers
         public void RelayMessage(double latitude, double longitude, string emailAddress)
         {
 
-     //      Xamarin.Essentials.Location PersonsLocation = new Xamarin.Essentials.Location(latitude, longitude);
-
+            //      Xamarin.Essentials.Location PersonsLocation = new Xamarin.Essentials.Location(latitude, longitude);
+            //GpsSensor gpsSensor = new GpsSensor(geoCoordinate);
+            GeoCoordinate PersonLocation = new GeoCoordinate(latitude,longitude);
             MessageTargetList targetList = GpsSensorTargetList(emailAddress);
-          //  GpsSensor gpsSensor = new GpsSensor(PersonsLocation, GetNoGoZonesByEmail(emailAddress));
-       //     bool signal = gpsSensor.ShouldAlertUser();
-           // if (signal == true)
+            GpsSensor gpsSensor = new GpsSensor(PersonLocation, GetNoGoZonesByEmail(emailAddress));
+                 bool signal = gpsSensor.ShouldAlertUser();
+             if (signal == true)
             {
                 foreach (var item in targetList.MessageTypeTargetList)
                 {
