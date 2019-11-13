@@ -5,36 +5,43 @@
 }
 
 <h2>@User.Identity.Name</h2>
-@Html.ActionLink("see user details", "AccountDetails")
+
 <p>
-    @Html.ActionLink("add new location", "GetAddress","Location")
+    @Html.ActionLink("Add new location", "GetAddress", "Location")
 </p>
+
+
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Userid)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Address)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PlaceName)
         </th>
-       
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Userid)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Address)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PlaceName)
         </td>
-       
         <td>
-          
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
-}
-
+    }
 </table>
+<p>To view your account details type into the address bar the site name User/AccountDetails/and the number that appears in the Userid columm </p>

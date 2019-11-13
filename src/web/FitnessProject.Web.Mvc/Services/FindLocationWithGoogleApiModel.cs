@@ -11,7 +11,7 @@ namespace FitnessProject.Web.Mvc.Models
     public class FindLocationWithGoogleApiModel : ILocation
     {
         const string Api = "AIzaSyCRQ2A5WO3oLqDrjyQhx6BRmf5KSgoo950";
-        public void FindLocation(string address,string placeName, string username)
+        public void FindLocation(string address, string username,string placeName)
         {
 
                 const string url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
@@ -33,7 +33,7 @@ namespace FitnessProject.Web.Mvc.Models
             using (FittAppContext fitt = new FittAppContext())
             {
 
-                fitt.NoGoZones.Add(new NoGoZone { Address = address, Latitude = ladi, Longitude = loni,PlaceName=placeName });
+                fitt.NoGoZones.Add(new NoGoZone { Address = address,PlaceName=placeName, Latitude = ladi, Longitude = loni });
                     fitt.SaveChanges();
                   
                 }

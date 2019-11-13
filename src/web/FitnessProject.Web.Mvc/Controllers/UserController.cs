@@ -71,7 +71,6 @@ namespace FitnessProject.Web.Mvc.Controllers
         [HttpGet]
         public ActionResult UserInfo()
         {
-
             using (var fitt = new FittAppContext())
             {
                 UserInfoModel userInfo = new UserInfoModel();
@@ -81,6 +80,7 @@ namespace FitnessProject.Web.Mvc.Controllers
                             select new UserInfoModel
                             {
                                 Id = noGo.UserNoGoZoneID,
+                                Userid=noGo.UserId,
                                 Address = noGo.NoGoZones.Address,
                                 PlaceName = noGo.NoGoZones.PlaceName,
 
@@ -90,19 +90,13 @@ namespace FitnessProject.Web.Mvc.Controllers
             }
         }
         [HttpGet]
-        public ActionResult AccountDetails()
+        public ActionResult AccountDetails(string name,int id)
         {
             using (FittAppContext fitt = new FittAppContext())
             {
-                AccountDetails accountDetails = new AccountDetails();
-                var model = from client in fitt.Users
-                            where client.Name == User.Identity.Name
-                            select new AccountDetails
-                            {
-                                UserId = client.UserID,
-                                UserName = client.Name,
-                                Email = client.EMail
-                            };
+                name = User.Identity.Name;
+                var model = fitt.Users.FirstOrDefault(x => x.UserID == id);
+
                 return View(model);
             }
         }
@@ -130,7 +124,7 @@ namespace FitnessProject.Web.Mvc.Controllers
                     fitt.SaveChanges();
                 }
             }
-            return RedirectToAction("UserInfo");
+                return RedirectToAction("UserInfo");
         }
         [HttpGet]
         public ActionResult Delete(int id)
@@ -138,8 +132,8 @@ namespace FitnessProject.Web.Mvc.Controllers
             using (FittAppContext fitt = new FittAppContext())
             {
 
-                var mode1 = fitt.UserNoGoZones.SingleOrDefault(x => x.UserNoGoZoneID == id);
-                return View(mode1);
+                var model = fitt.UserNoGoZones.SingleOrDefault(x => x.UserNoGoZoneID == id);
+                return View(model);
             }
         }
         [HttpPost]
@@ -148,12 +142,11 @@ namespace FitnessProject.Web.Mvc.Controllers
             name = User.Identity.Name;
             using (FittAppContext fitt = new FittAppContext())
             {
-                DeleteModel deleteModel = new DeleteModel();
                 var model = fitt.UserNoGoZones.Find(id);
-                var mod4el = model.NoGoZoneID;
-                var mo = fitt.NoGoZones.Find(mod4el);
-                var m = fitt.UserNoGoZones.Where(x => x.NoGoZoneID == mod4el).Count();
-                if (m > 2)
+                var userModel = model.NoGoZoneID;
+                var number = fitt.UserNoGoZones.Where(x => x.NoGoZoneID == userModel).Count();
+                var noGo = fitt.NoGoZones.Find(userModel);         
+                if (number > 1)
                 {
                     fitt.UserNoGoZones.Remove(model);
                     fitt.SaveChanges();
@@ -161,7 +154,7 @@ namespace FitnessProject.Web.Mvc.Controllers
                 else
                 {
                     fitt.UserNoGoZones.Remove(model);
-                    fitt.NoGoZones.Remove(mo);
+                    fitt.NoGoZones.Remove(noGo);
                     fitt.SaveChanges();
                 }
 

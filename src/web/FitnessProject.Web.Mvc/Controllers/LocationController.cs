@@ -35,7 +35,7 @@ namespace FitnessProjectServerSide.Controllers
                     }
                     else
                     {
-                        googleApiModel.FindLocation(address, User.Identity.Name,place);
+                        googleApiModel.FindLocation(address,User.Identity.Name,place);
                         addRemoveFromDb.AddToJoinTable(User.Identity.Name, address);
                        
                     }
