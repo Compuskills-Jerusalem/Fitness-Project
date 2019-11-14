@@ -34,8 +34,11 @@ namespace FitnessProject.Web.Mvc.Controllers
                     }
                     else
                     {
-                        fitt.Users.Add(new User { Name = name ,EMail=email});
+                        var newUser = fitt.Users.Add(new User { Name = name ,EMail=email});
+                        var gpsSensor = fitt.Sensors.FirstOrDefault(x => x.SensorName == "GpsSensor");
+                        fitt.UserSensors.Add(new UserSensor { User = newUser, Sensor = gpsSensor });
                         fitt.SaveChanges();
+
                         FormsAuthentication.SetAuthCookie(name, createPersistentCookie: true);
                     }
                 }

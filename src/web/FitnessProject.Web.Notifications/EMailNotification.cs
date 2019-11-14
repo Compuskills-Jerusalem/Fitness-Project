@@ -30,7 +30,6 @@ namespace FitnessProject.Web.Notifications
             var fromAddress = new MailAddress(SenderEmail, SenderName);
             var toAddress = new MailAddress(messageData.EMail);
 
-
             var smtp = new SmtpClient
             {
                 Host = "smtp.gmail.com",
@@ -40,6 +39,7 @@ namespace FitnessProject.Web.Notifications
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(fromAddress.Address, SenderPassword)
             };
+
             using (var message = new MailMessage(fromAddress, toAddress)
             {
                 Subject = messageData.MsgHeader,
@@ -48,13 +48,14 @@ namespace FitnessProject.Web.Notifications
             {
                 smtp.Send(message);
             }
+
             smtp.Dispose();
         }
     }
     //SMS Api Using https://control.txtlocal.co.uk/docs/ Login: qcr57223@oqiwq.com Password:3412534125Cc
     public class SMSNotification : INotifications
     {
-        public SMSNotification():this("n6131WEXd5Y-0b0KBG44o7r4QmD25gv3GkwgmXSBeW", "Capstone Projekt")
+        public SMSNotification():this("G33intyT/XI-Ak1t1ZQUsEA4VUUIQ2yrZ6WXW2BdlW", "Capstone Projekt")
         {
         }
         public SMSNotification(string apiKey, string senderName)
@@ -71,10 +72,10 @@ namespace FitnessProject.Web.Notifications
             {
                 byte[] response = wb.UploadValues("https://api.txtlocal.com/send/", new NameValueCollection()
                 {
-                {"apikey" , ApiKey},
-                {"numbers" , messageData.TelNr},
-                {"message" , messageData.MsgHeader+" "+messageData.MsgBody},
-                {"sender" , SenderName}
+                    {"apikey" , ApiKey},
+                    {"numbers" , messageData.TelNr},
+                    {"message" , messageData.MsgHeader+" "+messageData.MsgBody},
+                    {"sender" , SenderName}
                 });
             }
         }

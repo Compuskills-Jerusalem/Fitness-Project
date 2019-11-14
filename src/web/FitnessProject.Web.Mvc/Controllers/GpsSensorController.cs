@@ -14,24 +14,24 @@ namespace FitnessProject.Web.Mvc.Controllers
 {
     public class GpsSensorController : Controller
     {
-        public MessageTargetList GpsSensorTargetList(string EmailAddress)
+        public MessageTargetList GpsSensorTargetList(string emailAddress)
         {
             using (FittAppContext FAC = new FittAppContext())
             {
-                var userID = (from UserContact in FAC.UserContacts
-                              where UserContact.ContactValue == EmailAddress
-                              select new { UserContact.User.UserID }).Single();
+                var userID = (from user in FAC.Users
+                              where user.EMail == emailAddress
+                              select user.UserID ).Single();
 
-                var UserSensorID = (from UserSensor in FAC.UserSensors
-                                    where UserSensor.UserID == userID.UserID && UserSensor.Sensor.SensorName == "GpsSensor"
-                                    select new { UserSensor.UserSensorID }).Single();
+                var userSensorID = (from userSensor in FAC.UserSensors
+                                    where userSensor.UserID == userID && userSensor.Sensor.SensorName == "GpsSensor"
+                                    select userSensor.UserSensorID).Single();
 
-                var TargetListItems = from UserSensorAlert in FAC.UserSensorAlerts
-                                      where UserSensorAlert.UserSensorID == UserSensorID.UserSensorID
-                                      select UserSensorAlert.UserSensorAlertID;
+                var targetListItems = from userSensorAlert in FAC.UserSensorAlerts
+                                      where userSensorAlert.UserSensorID == userSensorID
+                                      select userSensorAlert.UserSensorAlertID;
 
                 MessageTargetList List = new MessageTargetList();
-                foreach (var TargetListItem in TargetListItems)
+                foreach (var TargetListItem in targetListItems)
                 {
                     if (TargetListItem == 1)
                     {
@@ -50,9 +50,8 @@ namespace FitnessProject.Web.Mvc.Controllers
         {
             using (FittAppContext FAC = new FittAppContext())
             {
-                var noGoZones = from userContact in FAC.UserContacts
-                                where userContact.ContactValue == EmailAddress
-                                from userNoGoZone in userContact.User.UserNoGoZones
+                var noGoZones = from userNoGoZone in FAC.UserNoGoZones
+                                where userNoGoZone.User.EMail == EmailAddress
                                 select userNoGoZone.NoGoZones;
 
                 return noGoZones.ToList().AsQueryable();
@@ -72,31 +71,21 @@ namespace FitnessProject.Web.Mvc.Controllers
         [HttpPost]
         public void RelayMessage(double latitude, double longitude, string emailAddress)
         {
-
-            //      Xamarin.Essentials.Location PersonsLocation = new Xamarin.Essentials.Location(latitude, longitude);
-            //GpsSensor gpsSensor = new GpsSensor(geoCoordinate);
-            GeoCoordinate PersonLocation = new GeoCoordinate(latitude,longitude);
-            MessageTargetList targetList = GpsSensorTargetList(emailAddress);
+            GeoCoordinate PersonLocation = new GeoCoordinate(latitude, longitude);
             GpsSensor gpsSensor = new GpsSensor(PersonLocation, GetNoGoZonesByEmail(emailAddress));
-                 bool signal = gpsSensor.ShouldAlertUser();
-             if (signal == true)
+
+            if (gpsSensor.ShouldAlertUser())
             {
-                foreach (var item in targetList.MessageTypeTargetList)
+                var notification = new SMSNotification();
+                notification.Send(new MessageData
                 {
-                    item.Send(new MessageData
-                    {
-                        EMail = emailAddress,
-                        MsgBody = "Success",
-                        MsgHeader = "taaaaaaaaaaaaatttttttttiiiiiiiiii",
-                        TelNr = "972586846003"
-
-                    });
-                }
+                    TelNr = "972586846003",
+                    MsgBody = "You got too close to a no go zone!",
+                    MsgHeader = "Alert"
+                });
             }
-            //MessageRelayer relayer = new MessageRelayer();
-            //relayer.RelayMessage(gpsSensor);
-
         }
+
         [HttpGet]
         public void Mock()
         {

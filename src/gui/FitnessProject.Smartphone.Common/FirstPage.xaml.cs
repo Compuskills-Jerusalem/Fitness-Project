@@ -48,7 +48,7 @@ namespace PN_XAML
                     {
                         int userID = 1;
                         
-                        PostRequest("http://www.compuskillscapstoneprojekt.com/", location.Latitude.ToString(), location.Longitude.ToString(), LoginManager.CurrentUser.Username);
+                        PostRequest("http://www.compuskillscapstoneprojekt.com/GpsSensor/RelayMessage", location.Latitude.ToString(), location.Longitude.ToString(), LoginManager.CurrentUser.Username);
 
                     }
                     await Task.Delay(2000);
