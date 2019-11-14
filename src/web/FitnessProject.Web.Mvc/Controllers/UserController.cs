@@ -73,14 +73,12 @@ namespace FitnessProject.Web.Mvc.Controllers
         {
             using (var fitt = new FittAppContext())
             {
-                UserInfoModel userInfo = new UserInfoModel();
-                //  e model item passed into the dictionary is of type 'System.Data.Entity.Infrastructure.DbQuery`1[<>f__AnonymousType3`3[System.String,System.Double,System.Double]]', but this dictionary requires a model item of type 'System.Collections.Generic.IEnumerable`1[FitnessProjectServerSide.Models.NoGoZone]'.
+                //UserInfoModel userInfo = new UserInfoModel();
                 var model = from noGo in fitt.UserNoGoZones
                             where noGo.User.Name == User.Identity.Name
                             select new UserInfoModel
                             {
                                 Id = noGo.UserNoGoZoneID,
-                                Userid=noGo.UserId,
                                 Address = noGo.NoGoZones.Address,
                                 PlaceName = noGo.NoGoZones.PlaceName,
 
@@ -90,18 +88,47 @@ namespace FitnessProject.Web.Mvc.Controllers
             }
         }
         [HttpGet]
-        public ActionResult AccountDetails(string name,int id)
+        public ActionResult AccountDetailsLogin()
         {
-            using (FittAppContext fitt = new FittAppContext())
-            {
-                name = User.Identity.Name;
-                var model = fitt.Users.FirstOrDefault(x => x.UserID == id);
-
-                return View(model);
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AccountDetailsLogin(string name)
+        {
+            using (var fitt = new FittAppContext())
+            {            
+                var user = fitt.Users.FirstOrDefault(x => x.Name == name);
+                if (user!=null&&name==User.Identity.Name)
+                {
+                  // FormsAuthentication.SetAuthCookie(name, createPersistentCookie: false);
+                    return RedirectToAction("AccountDetails");
+                }
+                else
+                {
+                    ModelState.AddModelError("name", "Unknown or unathorized username");
+                    return View();
+                }
             }
         }
         [HttpGet]
-        public ActionResult EditAccountDetails(int id)
+        public ActionResult AccountDetails()
+        {
+                using (FittAppContext fitt = new FittAppContext())
+                {
+                
+                var model = from customer in fitt.Users
+                            where customer.Name == User.Identity.Name
+                            select new Users
+                            {
+                            id=customer.UserID,
+                            Name=customer.Name,
+                            Email=customer.EMail
+                            };
+                    return View(model.AsEnumerable().ToList());
+                }
+        }
+        [HttpGet]
+        public ActionResult Edit(int id)
         {
 
             using (FittAppContext fitt = new FittAppContext())
@@ -111,11 +138,9 @@ namespace FitnessProject.Web.Mvc.Controllers
             }
         }
         [HttpPost]
-        public ActionResult EditAccountDetails(string name, int id, User user)
+        public ActionResult Edit(string name, int id, User user)
         {
             name = User.Identity.Name;
-            if (ModelState.IsValid)
-            {
                 using (FittAppContext fitt = new FittAppContext())
                 {
                     var model = fitt.Users.FirstOrDefault(x => x.UserID == id);
@@ -123,45 +148,49 @@ namespace FitnessProject.Web.Mvc.Controllers
                     model.Name = user.Name;
                     fitt.SaveChanges();
                 }
-            }
-                return RedirectToAction("UserInfo");
-        }
+            
+                return RedirectToAction("Login");        
+           }
         [HttpGet]
         public ActionResult Delete(int id)
         {
             using (FittAppContext fitt = new FittAppContext())
             {
-
-                var model = fitt.UserNoGoZones.SingleOrDefault(x => x.UserNoGoZoneID == id);
+                var model = fitt.Users.FirstOrDefault(x => x.UserID == id);
                 return View(model);
             }
         }
         [HttpPost]
-        public ActionResult Delete(int id, string name)
+        public ActionResult Delete(int id,string name)
         {
             name = User.Identity.Name;
             using (FittAppContext fitt = new FittAppContext())
             {
-                var model = fitt.UserNoGoZones.Find(id);
-                var userModel = model.NoGoZoneID;
-                var number = fitt.UserNoGoZones.Where(x => x.NoGoZoneID == userModel).Count();
-                var noGo = fitt.NoGoZones.Find(userModel);         
-                if (number > 1)
-                {
-                    fitt.UserNoGoZones.Remove(model);
+                var model = fitt.Users.Find(id);
+                
+                
+             
+            //    var noGo = fitt.NoGoZones.Find(noGoModel);
+              //  var no = noGo.NoGoZoneID;
+                //  var a= fitt.UserNoGoZones.Any(x => x.UserId == id);
+                // var genNoGo = fitt.UserNoGoZones.Find(clientNogos);
+                //var genNoGos = genNoGo.NoGoZoneID;
+                // var dangerZones = fitt.UserNoGoZones.Where(x => x.NoGoZoneID == genNoGos).Count();
+                // var dangerZone = fitt.NoGoZones.FirstOrDefault(x => x.NoGoZoneID == genNoGos);
+                // if (dangerZones>1)
+                //{
+                fitt.Users.Remove(model);
                     fitt.SaveChanges();
-                }
-                else
+               // }
+              /*  else
                 {
-                    fitt.UserNoGoZones.Remove(model);
-                    fitt.NoGoZones.Remove(noGo);
+                    fitt.Users.Remove(model);
+                    fitt.UserNoGoZones.Remove(genNoGo);
+                    fitt.NoGoZones.Remove(dangerZone);
                     fitt.SaveChanges();
-                }
-
-
-
-                return RedirectToAction("UserInfo");
+                }*/
             }
+            return RedirectToAction("index","Home");
+        }
         }
     }
-}

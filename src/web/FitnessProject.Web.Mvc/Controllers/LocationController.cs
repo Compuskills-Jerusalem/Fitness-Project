@@ -15,36 +15,72 @@ namespace FitnessProjectServerSide.Controllers
     [Authorize]
     public class LocationController : Controller
     {
-  
+
         [HttpGet]
         public ActionResult GetAddress()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult GetAddress ( string name,string address,string place)
-        {  
+        public ActionResult GetAddress(string address, string username, string placeName)
+        {
             FindLocationWithGoogleApiModel googleApiModel = new FindLocationWithGoogleApiModel();
             AddRemoveFromDbModel addRemoveFromDb = new AddRemoveFromDbModel();
-          
-                using (FittAppContext fitt = new FittAppContext())
+
+            using (FittAppContext fitt = new FittAppContext())
+            {
+                if (fitt.NoGoZones.Any(x => x.Address == address))
                 {
-                    if (fitt.NoGoZones.Any(x => x.Address == address))
-                    {
-                        addRemoveFromDb.AddToJoinTable(User.Identity.Name, address);                   
-                    }
-                    else
-                    {
-                        googleApiModel.FindLocation(address,User.Identity.Name,place);
-                        addRemoveFromDb.AddToJoinTable(User.Identity.Name, address);
-                       
-                    }
+                    addRemoveFromDb.AddToJoinTable(User.Identity.Name, address);
                 }
-            
+                else
+                {
+                    googleApiModel.FindLocation(address, User.Identity.Name, placeName);
+                    addRemoveFromDb.AddToJoinTable(User.Identity.Name, address);
+
+                }
+            }
             return RedirectToAction("UserInfo", "User");
         }
-
-
-  
+        [HttpGet]
+        public ActionResult LocationDelete(int id)
+        {
+            using (FittAppContext fitt = new FittAppContext())
+            {
+                var models = from location in fitt.UserNoGoZones
+                             where location.UserNoGoZoneID == id
+                             select new UserInfoModel
+                             {
+                                 Address = location.NoGoZones.Address,
+                                 PlaceName = location.NoGoZones.PlaceName
+                             };
+           //     var model = fitt.UserNoGoZones.SingleOrDefault(x => x.UserNoGoZoneID == id);
+                return View(models.AsEnumerable().ToList());
+            }
+        }
+        [HttpPost]
+        public ActionResult LocationDelete(int id, string name)
+        {
+            name = User.Identity.Name;
+            using (FittAppContext fitt = new FittAppContext())
+            {
+                var model = fitt.UserNoGoZones.Find(id);
+                var noGoModel = model.NoGoZoneID;
+                var number = fitt.UserNoGoZones.Where(x => x.NoGoZoneID == noGoModel).Count();
+                var noGo = fitt.NoGoZones.Find(noGoModel);
+                if (number > 1)
+                {
+                    fitt.UserNoGoZones.Remove(model);
+                    fitt.SaveChanges();
+                }
+                else
+                {
+                    fitt.UserNoGoZones.Remove(model);
+                    fitt.NoGoZones.Remove(noGo);
+                    fitt.SaveChanges();
+                }
+            }
+                return RedirectToAction("UserInfo","User");
+            }
         }
     }

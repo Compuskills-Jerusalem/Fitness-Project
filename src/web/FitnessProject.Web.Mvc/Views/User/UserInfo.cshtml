@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<FitnessProject.Web.Mvc.UserInfoModel>
 
 @{
-    ViewBag.Title = "UserInfo";
+    ViewBag.Title = "User Info";
 }
 
 <h2>@User.Identity.Name</h2>
@@ -13,9 +13,7 @@
 
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Userid)
-        </th>
+        
         <th>
             @Html.DisplayNameFor(model => model.Address)
         </th>
@@ -28,9 +26,7 @@
     @foreach (var item in Model)
     {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Userid)
-        </td>
+        
         <td>
             @Html.DisplayFor(modelItem => item.Address)
         </td>
@@ -39,9 +35,9 @@
         </td>
         <td>
 
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            @Html.ActionLink("Delete a location", "LocationDelete","Location", new { id = item.Id },null) 
         </td>
     </tr>
     }
 </table>
-<p>To view your account details type into the address bar the site name User/AccountDetails/and the number that appears in the Userid columm </p>
+@Html.ActionLink("View account details", "AccountDetailsLogin")

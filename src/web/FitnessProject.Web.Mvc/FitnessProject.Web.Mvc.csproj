@@ -253,8 +253,10 @@
     <Content Include="Views\User\UserInfo.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
     <Content Include="Views\User\AccountDetails.cshtml" />
-    <Content Include="Views\User\EditAccountDetails.cshtml" />
     <Content Include="Views\User\NewUser.cshtml" />
+    <Content Include="Views\User\AccountDetailsLogin.cshtml" />
+    <Content Include="Views\Location\LocationDelete.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

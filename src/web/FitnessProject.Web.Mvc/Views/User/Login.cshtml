@@ -5,7 +5,8 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Users</h4>
+        <h4>Please type in your user name to log in</h4>
+        <h5>If you changed your user name please type your new user name</h5>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -24,6 +25,4 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
