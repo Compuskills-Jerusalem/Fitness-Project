@@ -35,10 +35,10 @@ namespace PN_XAML.Views
                     //{"name", "bob" }
                     //{"Password", LoginManager.CurrentUser.Password }
                 };
-                var content = new FormUrlEncodedContent(values);
-                var a = new HttpClient();
-                var response = await a.PostAsync("http://10.0.2.2:55587/user/login", content);
-                var responseString = await response.Content.ReadAsStringAsync();
+                //var content = new FormUrlEncodedContent(values);
+                //var a = new HttpClient();
+                //var response = await a.PostAsync("http://10.0.2.2:55587/user/login", content);
+                //var responseString = await response.Content.ReadAsStringAsync();
 
                 await DisplayAlert("Login", "Login Success", "Ok");
 
