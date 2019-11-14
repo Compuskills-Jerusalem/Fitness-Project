@@ -184,7 +184,6 @@
     <Compile Include="Interfaces\ISensor.cs" />
     <Compile Include="MessageTargetList.cs" />
     <Compile Include="Services\AddRemoveFromDbModel.cs" />
-    <Compile Include="Services\DistanceCalculator.cs" />
     <Compile Include="Services\FindLocationWithGoogleApiModel.cs" />
     <Compile Include="Geolocation.cs" />
     <Compile Include="Global.asax.cs">

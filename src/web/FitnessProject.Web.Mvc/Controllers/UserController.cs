@@ -9,13 +9,14 @@ using FitnessProject.Web.Mvc.Services;
 
 namespace FitnessProject.Web.Mvc.Controllers
 {
-
+    
     public class UserController : Controller
     {
 
         [HttpGet]
         public ActionResult Create()
         {
+     
             return View();
         }
 
@@ -49,7 +50,7 @@ namespace FitnessProject.Web.Mvc.Controllers
         {
             return View();
         }
-
+        
         [HttpPost]
         public ActionResult Login(string name)
         {
