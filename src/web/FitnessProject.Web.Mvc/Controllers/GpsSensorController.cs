@@ -26,9 +26,9 @@ namespace FitnessProject.Web.Mvc.Controllers
                                     where userSensor.UserID == userID && userSensor.Sensor.SensorName == "GpsSensor"
                                     select userSensor.UserSensorID).Single();
 
-                var targetListItems = from UserSensorAlert in FAC.UserSensorAlerts
-                                      where UserSensorAlert.UserSensorID == userSensorID
-                                      select UserSensorAlert.UserSensorAlertID;
+                var targetListItems = from userSensorAlert in FAC.UserSensorAlerts
+                                      where userSensorAlert.UserSensorID == userSensorID
+                                      select userSensorAlert.UserSensorAlertID;
 
                 MessageTargetList List = new MessageTargetList();
                 foreach (var TargetListItem in targetListItems)
