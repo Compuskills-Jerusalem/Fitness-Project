@@ -69,7 +69,7 @@ namespace FitnessProject.Web.Mvc.Controllers
         }
 
         [HttpPost]
-        public void RelayMessage(double latitude, double longitude, string emailAddress)
+        public void RelayMessage(double latitude, double longitude, string emailAddress, string phoneNumber)
         {
             GeoCoordinate PersonLocation = new GeoCoordinate(latitude, longitude);
             GpsSensor gpsSensor = new GpsSensor(PersonLocation, GetNoGoZonesByEmail(emailAddress));
@@ -79,7 +79,7 @@ namespace FitnessProject.Web.Mvc.Controllers
                 INotifications notification = new SMSNotification();
                 notification.Send(new MessageData
                 {
-                    TelNr = "447857015405",
+                    TelNr = phoneNumber,
                     MsgBody = "You got too close to a no go zone!",
                     MsgHeader = "Alert"
                 });
