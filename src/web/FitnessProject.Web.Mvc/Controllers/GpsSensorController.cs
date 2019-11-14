@@ -50,9 +50,8 @@ namespace FitnessProject.Web.Mvc.Controllers
         {
             using (FittAppContext FAC = new FittAppContext())
             {
-                var noGoZones = from userContact in FAC.UserContacts
-                                where userContact.ContactValue == EmailAddress
-                                from userNoGoZone in userContact.User.UserNoGoZones
+                var noGoZones = from userNoGoZone in FAC.UserNoGoZones
+                                where userNoGoZone.User.EMail == EmailAddress
                                 select userNoGoZone.NoGoZones;
 
                 return noGoZones.ToList().AsQueryable();
@@ -77,10 +76,10 @@ namespace FitnessProject.Web.Mvc.Controllers
 
             if (gpsSensor.ShouldAlertUser())
             {
-                var notification = new EMailNotification();
+                var notification = new SMSNotification();
                 notification.Send(new MessageData
                 {
-                    EMail = emailAddress,
+                    TelNr = "972586846003",
                     MsgBody = "You got too close to a no go zone!",
                     MsgHeader = "Alert"
                 });
