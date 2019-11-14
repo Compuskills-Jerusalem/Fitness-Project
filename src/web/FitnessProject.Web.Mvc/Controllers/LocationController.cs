@@ -21,27 +21,37 @@ namespace FitnessProjectServerSide.Controllers
         {
             return View();
         }
+        
         [HttpPost]
         public ActionResult GetAddress(string address, string username, string placeName)
         {
             FindLocationWithGoogleApiModel googleApiModel = new FindLocationWithGoogleApiModel();
             AddRemoveFromDbModel addRemoveFromDb = new AddRemoveFromDbModel();
-
-            using (FittAppContext fitt = new FittAppContext())
+            if (address == string.Empty)
             {
-                if (fitt.NoGoZones.Any(x => x.Address == address))
-                {
-                    addRemoveFromDb.AddToJoinTable(User.Identity.Name, address);
-                }
-                else
-                {
-                    googleApiModel.FindLocation(address, User.Identity.Name, placeName);
-                    addRemoveFromDb.AddToJoinTable(User.Identity.Name, address);
-
-                }
+                ModelState.AddModelError("address", "please add a address");
+                return View();
             }
+            else {
+                using (FittAppContext fitt = new FittAppContext())
+                {
+                    if (fitt.NoGoZones.Any(x => x.Address == address))
+                    {
+                        addRemoveFromDb.AddToJoinTable(User.Identity.Name, address);
+                    }
+                    else
+                    {
+                        googleApiModel.FindLocation(address, User.Identity.Name, placeName);
+                        addRemoveFromDb.AddToJoinTable(User.Identity.Name, address);
+
+                    }
+                }
+                   
+                }
+            
             return RedirectToAction("UserInfo", "User");
         }
+       
         [HttpGet]
         public ActionResult LocationDelete(int id)
         {
@@ -58,6 +68,7 @@ namespace FitnessProjectServerSide.Controllers
                 return View(models.AsEnumerable().ToList());
             }
         }
+        [Authorize]
         [HttpPost]
         public ActionResult LocationDelete(int id, string name)
         {
