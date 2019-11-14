@@ -14,24 +14,24 @@ namespace FitnessProject.Web.Mvc.Controllers
 {
     public class GpsSensorController : Controller
     {
-        public MessageTargetList GpsSensorTargetList(string EmailAddress)
+        public MessageTargetList GpsSensorTargetList(string emailAddress)
         {
             using (FittAppContext FAC = new FittAppContext())
             {
-                var userID = (from UserContact in FAC.UserContacts
-                              where UserContact.ContactValue == EmailAddress
-                              select new { UserContact.User.UserID }).Single();
+                var userID = (from user in FAC.Users
+                              where user.EMail == emailAddress
+                              select user.UserID ).Single();
 
-                var UserSensorID = (from UserSensor in FAC.UserSensors
-                                    where UserSensor.UserID == userID.UserID && UserSensor.Sensor.SensorName == "GpsSensor"
-                                    select new { UserSensor.UserSensorID }).Single();
+                var userSensorID = (from userSensor in FAC.UserSensors
+                                    where userSensor.UserID == userID && userSensor.Sensor.SensorName == "GpsSensor"
+                                    select userSensor.UserSensorID).Single();
 
-                var TargetListItems = from UserSensorAlert in FAC.UserSensorAlerts
-                                      where UserSensorAlert.UserSensorID == UserSensorID.UserSensorID
+                var targetListItems = from UserSensorAlert in FAC.UserSensorAlerts
+                                      where UserSensorAlert.UserSensorID == userSensorID
                                       select UserSensorAlert.UserSensorAlertID;
 
                 MessageTargetList List = new MessageTargetList();
-                foreach (var TargetListItem in TargetListItems)
+                foreach (var TargetListItem in targetListItems)
                 {
                     if (TargetListItem == 1)
                     {
