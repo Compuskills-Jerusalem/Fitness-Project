@@ -72,31 +72,21 @@ namespace FitnessProject.Web.Mvc.Controllers
         [HttpPost]
         public void RelayMessage(double latitude, double longitude, string emailAddress)
         {
-
-            //      Xamarin.Essentials.Location PersonsLocation = new Xamarin.Essentials.Location(latitude, longitude);
-            //GpsSensor gpsSensor = new GpsSensor(geoCoordinate);
-            GeoCoordinate PersonLocation = new GeoCoordinate(latitude,longitude);
-            MessageTargetList targetList = GpsSensorTargetList(emailAddress);
+            GeoCoordinate PersonLocation = new GeoCoordinate(latitude, longitude);
             GpsSensor gpsSensor = new GpsSensor(PersonLocation, GetNoGoZonesByEmail(emailAddress));
-                 bool signal = gpsSensor.ShouldAlertUser();
-             if (signal == true)
+
+            if (gpsSensor.ShouldAlertUser())
             {
-                foreach (var item in targetList.MessageTypeTargetList)
+                var notification = new EMailNotification();
+                notification.Send(new MessageData
                 {
-                    item.Send(new MessageData
-                    {
-                        EMail = emailAddress,
-                        MsgBody = "Success",
-                        MsgHeader = "taaaaaaaaaaaaatttttttttiiiiiiiiii",
-                        TelNr = "972586846003"
-
-                    });
-                }
+                    EMail = emailAddress,
+                    MsgBody = "You got too close to a no go zone!",
+                    MsgHeader = "Alert"
+                });
             }
-            //MessageRelayer relayer = new MessageRelayer();
-            //relayer.RelayMessage(gpsSensor);
-
         }
+
         [HttpGet]
         public void Mock()
         {

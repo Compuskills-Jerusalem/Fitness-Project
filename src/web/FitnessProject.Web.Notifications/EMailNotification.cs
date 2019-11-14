@@ -30,7 +30,6 @@ namespace FitnessProject.Web.Notifications
             var fromAddress = new MailAddress(SenderEmail, SenderName);
             var toAddress = new MailAddress(messageData.EMail);
 
-
             var smtp = new SmtpClient
             {
                 Host = "smtp.gmail.com",
@@ -40,6 +39,7 @@ namespace FitnessProject.Web.Notifications
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(fromAddress.Address, SenderPassword)
             };
+
             using (var message = new MailMessage(fromAddress, toAddress)
             {
                 Subject = messageData.MsgHeader,
@@ -48,6 +48,7 @@ namespace FitnessProject.Web.Notifications
             {
                 smtp.Send(message);
             }
+
             smtp.Dispose();
         }
     }
