@@ -4,26 +4,26 @@
     ViewBag.Title = "Home page";
 }
 
-<h1>FittApp</h1>
+<h1>FitnessApp</h1>
 
 <p>
-    <b> Welcome to fittApp. The high tech weight loss app.</b>
+    <b> Welcome to fitness app. The weight loss app.</b>
 </p>
 <div>
     <p>
         <b>
-            If you are a new user please click here
+            If you are a new user please click @Html.ActionLink("here", "Create", "User")
         </b>
     </p>
-    @Html.ActionLink("Add User", "Create","User")
+   
 </div>
 
 <div>
    <p>
-    <b>
-        If you have a account please click here
-    </b>
+       <b>
+           If you have a account please click here @Html.ActionLink("here", "Login", "User")
+       </b>
   </p>
 
-    @Html.ActionLink("Login", "Login", "User")
+    
 </div>
