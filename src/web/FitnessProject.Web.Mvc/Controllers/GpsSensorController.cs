@@ -76,21 +76,25 @@ namespace FitnessProject.Web.Mvc.Controllers
 
             if (gpsSensor.ShouldAlertUser())
             {
-                INotifications notification = new SMSNotification();
-                notification.Send(new MessageData
+                var msgData = new MessageData
                 {
+                    EMail = emailAddress,
                     TelNr = phoneNumber,
                     MsgBody = "You got too close to a no go zone!",
                     MsgHeader = "Alert"
-                });
+                };
 
-                notification = new EMailNotification();
-                notification.Send(new MessageData
+                if (!string.IsNullOrEmpty(phoneNumber))
                 {
-                    EMail = emailAddress,
-                    MsgBody = "You got too close to a no go zone!",
-                    MsgHeader = "Alert"
-                });
+                    INotifications notification = new SMSNotification();
+                    notification.Send(msgData);
+                }
+
+                if (!string.IsNullOrEmpty(emailAddress))
+                {
+                    INotifications notification = new EMailNotification();
+                    notification.Send(msgData);
+                }
             }
         }
 
