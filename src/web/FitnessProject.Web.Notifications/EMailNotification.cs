@@ -11,7 +11,7 @@ namespace FitnessProject.Web.Notifications
 {
     public class EMailNotification :INotifications
     {
-        public EMailNotification():this("compuskills.fitnessprojekt@gmail.com", "Compuskills Capstone", "3412534125")
+        public EMailNotification():this("compuskills.fitnessprojekt@gmail.com", "Compuskills Capstone", "3412534125Es")
         { }
         public EMailNotification(string senderEmail, string senderName, string senderPassword)
         {
@@ -37,7 +37,7 @@ namespace FitnessProject.Web.Notifications
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromAddress.Address, SenderPassword)
+                Credentials = new NetworkCredential(SenderEmail, SenderPassword)
             };
 
             using (var message = new MailMessage(fromAddress, toAddress)
