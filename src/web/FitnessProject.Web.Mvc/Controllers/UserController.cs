@@ -36,7 +36,6 @@ namespace FitnessProject.Web.Mvc.Controllers
                         fitt.Users.Add(new User { Name = name ,EMail=email});
                         fitt.SaveChanges();
                         FormsAuthentication.SetAuthCookie(name, createPersistentCookie: true);
-
                     }
                 }
             }
@@ -87,70 +86,7 @@ namespace FitnessProject.Web.Mvc.Controllers
                 return View(model.AsEnumerable().ToList());
             }
         }
-        [HttpGet]
-        public ActionResult AccountDetailsLogin()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult AccountDetailsLogin(string name)
-        {
-            using (var fitt = new FittAppContext())
-            {            
-                var user = fitt.Users.FirstOrDefault(x => x.Name == name);
-                if (user!=null&&name==User.Identity.Name)
-                {
-                  // FormsAuthentication.SetAuthCookie(name, createPersistentCookie: false);
-                    return RedirectToAction("AccountDetails");
-                }
-                else
-                {
-                    ModelState.AddModelError("name", "Unknown or unathorized username");
-                    return View();
-                }
-            }
-        }
-        [HttpGet]
-        public ActionResult AccountDetails()
-        {
-                using (FittAppContext fitt = new FittAppContext())
-                {
-                
-                var model = from customer in fitt.Users
-                            where customer.Name == User.Identity.Name
-                            select new Users
-                            {
-                            id=customer.UserID,
-                            Name=customer.Name,
-                            Email=customer.EMail
-                            };
-                    return View(model.AsEnumerable().ToList());
-                }
-        }
-        [HttpGet]
-        public ActionResult Edit(int id)
-        {
-
-            using (FittAppContext fitt = new FittAppContext())
-            {
-                var model = fitt.Users.FirstOrDefault(x => x.UserID == id);
-                return View(model);
-            }
-        }
-        [HttpPost]
-        public ActionResult Edit(string name, int id, User user)
-        {
-            name = User.Identity.Name;
-                using (FittAppContext fitt = new FittAppContext())
-                {
-                    var model = fitt.Users.FirstOrDefault(x => x.UserID == id);
-                    model.EMail = user.EMail;
-                    model.Name = user.Name;
-                    fitt.SaveChanges();
-                }
-            
-                return RedirectToAction("Login");        
-           }
+     
         [HttpGet]
         public ActionResult Delete(int id)
         {
