@@ -1,16 +1,16 @@
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FitnessProject.Web.Calc")]
+[assembly: AssemblyTitle("FitnessProject.Web.GetLatitudeLongitudeFromAddress")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FitnessProject.Web.Calc")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCompany("HP Inc.")]
+[assembly: AssemblyProduct("FitnessProject.Web.GetLatitudeLongitudeFromAddress")]
+[assembly: AssemblyCopyright("Copyright © HP Inc. 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("bca0368f-4ef0-433b-9cca-1da31f94a2dc")]
+[assembly: Guid("ceaff05d-9cae-4ac1-b460-bfd0a9b3bdde")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -1,96 +1,79 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Web.Mvc;
-//using Newtonsoft.Json; 
-//using System.Net;
-//using FitnessProject.Web.Domain;
-//using FitnessProject.Web.Mvc;
-//using FitnessProject.Web.Mvc.Models;
-//using System.Web.Security;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using Newtonsoft.Json;
+using System.Net;
+using FitnessProject.Web.Domain;
+using FitnessProject.Web.Mvc;
+using FitnessProject.Web.Mvc.Models;
+using System.Web.Security;
+using FitnessProject.Web.GetLatitudeLongitudeFromAddress;
+using System.Device.Location;
+using Microsoft.AspNet.Identity;
 
-//namespace FitnessProjectServerSide.Controllers
-//{
-//    [Authorize]
-//    public class LocationController : Controller
-//    {
+namespace FitnessProjectServerSide.Controllers
+{
+    [Authorize]
+    public class LocationController : Controller
+    {
+        private FitnessAppContext db = new FitnessAppContext();
+        public ActionResult Index()
+        {
+            var TempUser = User.Identity.GetUserId();
+            var models = db.NoGoZones.Where(x => x.UserId == TempUser).Select(x => new UserInfoModel
+            {
+                Address = x.Address,
+                PlaceName = x.PlaceName,
+                Id= x.NoGoZoneID
+            });
+            return View(models.AsEnumerable().ToList());
 
-//        [HttpGet]
-//        public ActionResult GetAddress()
-//        {
-//            return View();
-//        }
-        
-//        [HttpPost]
-//        public ActionResult GetAddress(string address, string username, string placeName)
-//        {
-//            FindLocationWithGoogleApiModel googleApiModel = new FindLocationWithGoogleApiModel();
-//            AddRemoveFromDbModel addRemoveFromDb = new AddRemoveFromDbModel();
-//            if (address == string.Empty)
-//            {
-//                ModelState.AddModelError("address", "please add a address");
-//                return View();
-//            }
-//            else {
-//                using (FitnessAppContext fitt = new FitnessAppContext())
-//                {
-//                    if (fitt.NoGoZones.Any(x => x.Address == address))
-//                    {
-//                        addRemoveFromDb.AddToJoinTable(User.Identity.Name, address);
-//                    }
-//                    else
-//                    {
-//                        googleApiModel.FindLocation(address, User.Identity.Name, placeName);
-//                        addRemoveFromDb.AddToJoinTable(User.Identity.Name, address);
+        }
+        public ActionResult GetAddress()
+        {
+            return View();
+        }
 
-//                    }
-//                }
-                   
-//                }
-            
-//            return RedirectToAction("UserInfo", "User");
-//        }
-       
-//        [HttpGet]
-//        public ActionResult LocationDelete(int id)
-//        {
-//            using (FitnessAppContext fitt = new FitnessAppContext())
-//            {
-//                var models = from location in fitt.UserNoGoZones
-//                             where location.UserNoGoZoneID == id
-//                             select new UserInfoModel
-//                             {
-//                                 Address = location.NoGoZones.Address,
-//                                 PlaceName = location.NoGoZones.PlaceName
-//                             };
-//           //     var model = fitt.UserNoGoZones.SingleOrDefault(x => x.UserNoGoZoneID == id);
-//                return View(models.AsEnumerable().ToList());
-//            }
-//        }
-//        [Authorize]
-//        [HttpPost]
-//        public ActionResult LocationDelete(int id, string name)
-//        {
-//            name = User.Identity.Name;
-//            using (FitnessAppContext fitt = new FitnessAppContext())
-//            {
-//                var model = fitt.UserNoGoZones.Find(id);
-//                var noGoModel = model.NoGoZoneID;
-//                var number = fitt.UserNoGoZones.Where(x => x.NoGoZoneID == noGoModel).Count();
-//                var noGo = fitt.NoGoZones.Find(noGoModel);
-//                if (number > 1)
-//                {
-//                    fitt.UserNoGoZones.Remove(model);
-//                    fitt.SaveChanges();
-//                }
-//                else
-//                {
-//                    fitt.UserNoGoZones.Remove(model);
-//                    fitt.NoGoZones.Remove(noGo);
-//                    fitt.SaveChanges();
-//                }
-//            }
-//                return RedirectToAction("UserInfo","User");
-//            }
-//        }
-//    }
+        [HttpPost]
+        public ActionResult GetAddress(string address, string placeName)
+        {
+
+            if (address == string.Empty)
+            {
+                ModelState.AddModelError("address", "Please add a Address");
+                return View();
+            }
+            if (placeName == string.Empty)
+            {
+                ModelState.AddModelError("placeName", "Please add a Name");
+                return View();
+            }
+            else
+            {
+                GeoCoordinate LadLonAddress = GetLatitudeLongitudeFromAddress.FindLocation(address);
+                db.NoGoZones.Add(new NoGoZone
+                {
+                    PlaceName=placeName,
+                    UserId= User.Identity.GetUserId(),
+                    Latitude=LadLonAddress.Latitude,
+                    Longitude=LadLonAddress.Longitude,
+                    Address=address,
+                });
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+      
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}

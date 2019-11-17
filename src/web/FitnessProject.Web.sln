@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessProject.Web.Notifica
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessProject.Web.Domain", "DatabaseConn\FitnessProject.Web.Domain.csproj", "{FFF69FEE-E79F-46A3-908B-1129F13D9A1D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessProject.Web.GetLatitudeLongitudeFromAddress", "FitnessProject.Web.GetLatitudeLongitudeFromAddress\FitnessProject.Web.GetLatitudeLongitudeFromAddress.csproj", "{CEAFF05D-9CAE-4AC1-B460-BFD0A9B3BDDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessProject.Web.CompareLocations", "FitnessProject.Web.CompareLocations\FitnessProject.Web.CompareLocations.csproj", "{50CE05C2-25FB-4E40-A327-4D92E274F680}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{FFF69FEE-E79F-46A3-908B-1129F13D9A1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFF69FEE-E79F-46A3-908B-1129F13D9A1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFF69FEE-E79F-46A3-908B-1129F13D9A1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEAFF05D-9CAE-4AC1-B460-BFD0A9B3BDDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEAFF05D-9CAE-4AC1-B460-BFD0A9B3BDDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEAFF05D-9CAE-4AC1-B460-BFD0A9B3BDDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEAFF05D-9CAE-4AC1-B460-BFD0A9B3BDDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50CE05C2-25FB-4E40-A327-4D92E274F680}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50CE05C2-25FB-4E40-A327-4D92E274F680}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50CE05C2-25FB-4E40-A327-4D92E274F680}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50CE05C2-25FB-4E40-A327-4D92E274F680}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,14 +1,12 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 namespace FitnessProject.Web.Mvc.Models
 {
     public class Users
 
     {
-        public int id { get; set; }
+
+        public string Name { get; set; }
         [Required]
-            public string Name { get; set; }   
-              [Required]
-            public string Email { get; set; }
+        public string Email { get; set; }
     }
 }
