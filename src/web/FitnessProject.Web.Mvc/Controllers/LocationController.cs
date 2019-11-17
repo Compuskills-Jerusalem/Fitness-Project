@@ -27,16 +27,16 @@ namespace FitnessProjectServerSide.Controllers
                 PlaceName = x.PlaceName,
                 Id= x.NoGoZoneID
             });
-            return View(models.AsEnumerable().ToList());
+            return View(models.AsEnumerable());
 
         }
-        public ActionResult GetAddress()
+        public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult GetAddress(string address, string placeName)
+        public ActionResult Create(string address, string placeName)
         {
 
             if (address == string.Empty)
@@ -65,8 +65,65 @@ namespace FitnessProjectServerSide.Controllers
 
             return RedirectToAction("Index");
         }
+        public ActionResult Edit(int id)
+        {
+            var TempNoGo = db.NoGoZones.Find(id);
+            return View(new UserInfoModel
+            {
+                PlaceName=TempNoGo.PlaceName,
+                Address=TempNoGo.Address,
+                Id=TempNoGo.NoGoZoneID
+            });
+        }
 
-      
+        [HttpPost]
+        public ActionResult Edit(string address, string placeName, int id)
+        {
+
+            if (address == string.Empty)
+            {
+                ModelState.AddModelError("address", "Please add a Address");
+                return View();
+            }
+            if (placeName == string.Empty)
+            {
+                ModelState.AddModelError("placeName", "Please add a Name");
+                return View();
+            }
+            else
+            {
+                GeoCoordinate LadLonAddress = GetLatitudeLongitudeFromAddress.FindLocation(address);
+                var EditNoGo = db.NoGoZones.Find(id);
+                EditNoGo.Latitude = LadLonAddress.Latitude;
+                EditNoGo.Longitude = LadLonAddress.Longitude;
+                EditNoGo.PlaceName = placeName;
+                EditNoGo.Address = address;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public ActionResult Delete(int? id)
+        {
+            var TempNoGo = db.NoGoZones.Find(id);
+            return View(new UserInfoModel
+            {
+                PlaceName = TempNoGo.PlaceName,
+                Address = TempNoGo.Address,
+                Id = TempNoGo.NoGoZoneID
+            });
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            var TempNoGo = db.NoGoZones.Find(id);
+            db.NoGoZones.Remove(TempNoGo);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
