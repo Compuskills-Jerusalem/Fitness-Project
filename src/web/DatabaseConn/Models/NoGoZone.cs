@@ -7,7 +7,8 @@ namespace FitnessProject.Web.Domain
     {
         [Key]
         public int NoGoZoneID { get; set; }
-        public ICollection<UserNoGoZone> UserNoGoZonesid { get; set; }    
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
         public string PlaceName { get; set; }
         public string Address { get; set; }
         public double Latitude { get; set; }

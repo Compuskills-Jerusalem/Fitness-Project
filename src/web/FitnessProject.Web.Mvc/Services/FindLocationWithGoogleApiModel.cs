@@ -30,7 +30,7 @@ namespace FitnessProject.Web.Mvc.Models
             }
             double ladi = Convert.ToDouble(lad);
             double loni = Convert.ToDouble(lon);
-            using (FittAppContext fitt = new FittAppContext())
+            using (FitnessAppContext fitt = new FitnessAppContext())
             {
 
                 fitt.NoGoZones.Add(new NoGoZone { Address = address,PlaceName=placeName, Latitude = ladi, Longitude = loni });
