@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace DatabaseConn
+namespace FitnessProject.Web.Domain
 {
     public class NoGoZone
     {

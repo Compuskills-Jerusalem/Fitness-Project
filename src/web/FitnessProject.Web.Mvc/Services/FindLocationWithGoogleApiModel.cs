@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
-using DatabaseConn;
+using FitnessProject.Web.Domain;
 using Newtonsoft.Json;
 
 namespace FitnessProject.Web.Mvc.Models

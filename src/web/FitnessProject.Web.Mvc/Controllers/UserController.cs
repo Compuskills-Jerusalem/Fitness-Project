@@ -4,7 +4,7 @@ using System.Web;
 using System.Web.Mvc;
 using FitnessProject.Web.Mvc.Models;
 using System.Web.Security;
-using DatabaseConn;
+using FitnessProject.Web.Domain;
 using FitnessProject.Web.Mvc.Services;
 
 namespace FitnessProject.Web.Mvc.Controllers

@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DatabaseConn
+namespace FitnessProject.Web.Domain
 {
-    public class FittAppContext : DbContext
+    public class FittAppContext : IdentityDbContext<User>
     {
-        public DbSet<User> Users { get; set; }
         public DbSet<NoGoZone> NoGoZones { get; set; }
         public DbSet<UserNoGoZone> UserNoGoZones { get; set; }
         public DbSet<Alert> Alerts { get; set; }
@@ -18,11 +18,6 @@ namespace DatabaseConn
         public DbSet<UserSensor> UserSensors { get; set; }
         public DbSet<UserContact> UserContacts { get; set; }
         public DbSet<UserSensorAlert> UserSensorAlerts { get; set; }
-   
-
-
-
-
     }
 
 }

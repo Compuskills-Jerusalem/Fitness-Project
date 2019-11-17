@@ -1,4 +1,4 @@
-﻿using DatabaseConn;
+﻿using FitnessProject.Web.Domain;
 using FitnessProject.Web.Mvc.Interfaces;
 using System;
 using System.Collections.Generic;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Newtonsoft.Json; 
 using System.Net;
-using DatabaseConn;
+using FitnessProject.Web.Domain;
 using FitnessProject.Web.Mvc;
 using FitnessProject.Web.Mvc.Models;
 using System.Web.Security;

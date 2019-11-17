@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DatabaseConn;
+using FitnessProject.Web.Domain;
 namespace FitnessProject.Web.Mvc.Services
 {
     public class AddRemoveFromDbModel

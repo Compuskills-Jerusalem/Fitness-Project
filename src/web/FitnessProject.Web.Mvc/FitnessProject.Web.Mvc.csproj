@@ -318,9 +318,9 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DatabaseConn\DatabaseConn.csproj">
+    <ProjectReference Include="..\DatabaseConn\FitnessProject.Web.Domain.csproj">
       <Project>{FFF69FEE-E79F-46A3-908B-1129F13D9A1D}</Project>
-      <Name>DatabaseConn</Name>
+      <Name>FitnessProject.Web.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\FitnessProject.Web.Notifications\FitnessProject.Web.Notifications.csproj">
       <Project>{dae4d79c-5b95-411b-951f-6ddc7fb289b0}</Project>

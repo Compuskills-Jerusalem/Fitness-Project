@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DatabaseConn
+namespace FitnessProject.Web.Domain
 {
     public class Alert
     {

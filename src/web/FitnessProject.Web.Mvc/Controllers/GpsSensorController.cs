@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using FitnessProject.Web.Mvc;
-using DatabaseConn;
+using FitnessProject.Web.Domain;
 using FitnessProject.Web.Notifications;
 
 using System.Device.Location;

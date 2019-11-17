@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace DatabaseConn
+namespace FitnessProject.Web.Domain
 {
-    public class User
+    public class User : IdentityUser
     {
         
         public int UserID { get; set; }
