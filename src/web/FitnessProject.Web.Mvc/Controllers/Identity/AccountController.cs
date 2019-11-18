@@ -12,12 +12,15 @@ using FitnessProject.Web.Domain;
 using FitnessProject.Web.Domain.Identity;
 using FitnessProject.Web.Mvc.Models;
 using Compuskills.Projects.TotalTimesheetPro.Mvc.Identity;
+using DatabaseConn.Models;
 
 namespace FitnessProject.Web.Mvc.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        private FitnessAppContext db = new FitnessAppContext();
+
         private AppSignInManager _signInManager;
         private AppUserManager _userManager;
 
@@ -86,11 +89,21 @@ namespace FitnessProject.Web.Mvc.Controllers
                 UserName = model.EmailAddress,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                Email = model.EmailAddress
+                Email = model.EmailAddress,
+                TelNr= model.TelNr
             }, password: model.Password);
 
             if (result == IdentityResult.Success)
             {
+                var temp = User.Identity.GetUserId();
+                db.AlertTypes.Add(new AlertType
+                {
+                    EMail = true,
+                    Push = false,
+                    Text = false,
+                    UserId = temp
+                });
+                db.SaveChanges();
                 return RedirectToAction("Login");
             }
             else
@@ -127,7 +140,7 @@ namespace FitnessProject.Web.Mvc.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index","Location");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -250,11 +263,11 @@ namespace FitnessProject.Web.Mvc.Controllers
                     _signInManager.Dispose();
                     _signInManager = null;
                 }
+                db.Dispose();
             }
 
             base.Dispose(disposing);
         }
-
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";

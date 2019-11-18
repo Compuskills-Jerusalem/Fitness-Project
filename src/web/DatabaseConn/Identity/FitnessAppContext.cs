@@ -18,7 +18,6 @@ namespace FitnessProject.Web.Domain
         {
             return new FitnessAppContext();
         }
-
     }
 
 }

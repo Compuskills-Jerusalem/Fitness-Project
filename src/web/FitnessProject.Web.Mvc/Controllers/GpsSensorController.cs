@@ -44,6 +44,20 @@ namespace FitnessProject.Web.Mvc.Controllers
                     INotifications notification = new EMailNotification();
                     notification.Send(msgData);
                 }
+                if (!string.IsNullOrEmpty(TempUser.Push))
+                {
+                    INotifications notification = new PushFirebase();
+                    notification.Send(msgData);
+                }
+            }
+        }
+        public void FirebaseToken(string email, string token)
+        {
+            User TempUser = db.Users.Where(x => x.Email == email).FirstOrDefault();
+            if (TempUser!=null)
+            {
+                TempUser.Push = token;
+                db.SaveChanges();
             }
         }
         protected override void Dispose(bool disposing)

@@ -12,12 +12,17 @@ namespace FitnessProject.Web.Mvc.Models
     }
     public class CreateUserModel
     {
+        [Display(Name ="E-Mail")]
         public string EmailAddress { get; set; }
         public string Password { get; set; }
+        [Display(Name = "Confirm Password")]
         public string ConfirmPassword { get; set; }
-
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
+        [Display(Name = "Tel-Nr")]
+        public string TelNr { get; set; }
     }
 
     public class SendCodeViewModel

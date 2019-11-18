@@ -23,7 +23,8 @@ namespace PN_XAML.Droid
 
             IEnumerable<KeyValuePair<string, string>> queries = new List<KeyValuePair<string, string>>()
             {
-                {new KeyValuePair<string, string>(key: "Token", value: token) },
+                {new KeyValuePair<string, string>(key: "Email", value: LoginManager.CurrentUser.Username) },
+                {new KeyValuePair<string, string>(key: "Token", value: token) }
             };
             FormUrlEncodedContent q = new FormUrlEncodedContent(queries);
             using (HttpClient client = new HttpClient())

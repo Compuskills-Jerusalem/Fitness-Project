@@ -8,12 +8,16 @@ using Microsoft.Owin.Security;
 using FitnessProject.Web.Mvc.Models;
 using FitnessProject.Web.Domain.Identity;
 using Compuskills.Projects.TotalTimesheetPro.Mvc.Identity;
+using DatabaseConn.Models;
+using FitnessProject.Web.Domain;
 
 namespace FitnessProject.Web.Mvc.Controllers
 {
     [Authorize]
     public class ManageController : Controller
     {
+        private FitnessAppContext db = new FitnessAppContext();
+
         private AppSignInManager _signInManager;
         private AppUserManager _userManager;
 
@@ -75,7 +79,23 @@ namespace FitnessProject.Web.Mvc.Controllers
             };
             return View(model);
         }
+        public ActionResult ChangeAlert()
+        {
+            var TempUser = User.Identity.GetUserId();
+            var model =db.AlertTypes.Where(x => x.UserId == TempUser).FirstOrDefault();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ChangeAlert(AlertType model)
+        {
+            var AlertUser = db.AlertTypes.Where(x => x.AlertTypeId == model.AlertTypeId).FirstOrDefault();
+            AlertUser.EMail = model.EMail;
+            AlertUser.Push = model.Push;
+            AlertUser.Text = model.Text;
+            db.SaveChanges();
 
+            return RedirectToAction("Index");
+        }
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]
@@ -329,6 +349,10 @@ namespace FitnessProject.Web.Mvc.Controllers
             {
                 _userManager.Dispose();
                 _userManager = null;
+            }
+            if (disposing)
+            {
+                db.Dispose();
             }
 
             base.Dispose(disposing);

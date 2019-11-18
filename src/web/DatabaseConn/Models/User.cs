@@ -9,6 +9,7 @@ namespace FitnessProject.Web.Domain
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string TelNr { get; set; }
+        public string Push { get; set; }
         public ICollection<NoGoZone> UserNoGoZones { get; set; }
 
     }

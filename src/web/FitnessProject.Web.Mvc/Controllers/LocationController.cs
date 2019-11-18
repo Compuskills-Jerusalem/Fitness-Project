@@ -65,9 +65,27 @@ namespace FitnessProjectServerSide.Controllers
 
             return RedirectToAction("Index");
         }
+        public ActionResult Details(int? id)
+        {
+            var TempNoGo = db.NoGoZones.Find(id);
+            if (TempNoGo.UserId != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+            return View(new UserInfoModel
+            {
+                PlaceName = TempNoGo.PlaceName,
+                Address = TempNoGo.Address,
+                Id = TempNoGo.NoGoZoneID
+            });
+        }
         public ActionResult Edit(int id)
         {
             var TempNoGo = db.NoGoZones.Find(id);
+            if (TempNoGo.UserId!=User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             return View(new UserInfoModel
             {
                 PlaceName=TempNoGo.PlaceName,
@@ -94,6 +112,10 @@ namespace FitnessProjectServerSide.Controllers
             {
                 GeoCoordinate LadLonAddress = GetLatitudeLongitudeFromAddress.FindLocation(address);
                 var EditNoGo = db.NoGoZones.Find(id);
+                if (EditNoGo.UserId != User.Identity.GetUserId())
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                }
                 EditNoGo.Latitude = LadLonAddress.Latitude;
                 EditNoGo.Longitude = LadLonAddress.Longitude;
                 EditNoGo.PlaceName = placeName;
@@ -107,6 +129,10 @@ namespace FitnessProjectServerSide.Controllers
         public ActionResult Delete(int? id)
         {
             var TempNoGo = db.NoGoZones.Find(id);
+            if (TempNoGo.UserId != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             return View(new UserInfoModel
             {
                 PlaceName = TempNoGo.PlaceName,
@@ -119,6 +145,10 @@ namespace FitnessProjectServerSide.Controllers
         public ActionResult Delete(int id)
         {
             var TempNoGo = db.NoGoZones.Find(id);
+            if (TempNoGo.UserId != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             db.NoGoZones.Remove(TempNoGo);
             db.SaveChanges();
             return RedirectToAction("Index");
