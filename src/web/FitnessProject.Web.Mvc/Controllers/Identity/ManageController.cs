@@ -93,7 +93,7 @@ namespace FitnessProject.Web.Mvc.Controllers
                     UserId = TempUser
                 });
                 db.SaveChanges();
-                var model = db.AlertTypes.Where(x => x.UserId == TempUser).FirstOrDefault();
+                model = db.AlertTypes.Where(x => x.UserId == TempUser).FirstOrDefault();
             }
             return View(model);
         }
