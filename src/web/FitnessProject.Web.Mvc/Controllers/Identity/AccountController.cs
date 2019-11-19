@@ -95,6 +95,15 @@ namespace FitnessProject.Web.Mvc.Controllers
 
             if (result == IdentityResult.Success)
             {
+                var TempUser = db.Users.Where(x => x.Email == model.EmailAddress).FirstOrDefault();
+                db.AlertTypes.Add(new AlertType
+                {
+                    EMail = true,
+                    Push = false,
+                    Text = false,
+                    UserId = TempUser.Id
+                });
+                db.SaveChanges();
                 return RedirectToAction("Login");
             }
             else

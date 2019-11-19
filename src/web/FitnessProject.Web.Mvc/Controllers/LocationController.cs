@@ -34,6 +34,14 @@ namespace FitnessProjectServerSide.Controllers
         {
             return View();
         }
+        
+        [AllowAnonymous]
+        public ActionResult GetLadLon(string address)
+        {
+            GeoCoordinate LadLonAddress = GetLatitudeLongitudeFromAddress.FindLocation(address);
+            LocationMap Location = new LocationMap { Latitude = LadLonAddress.Latitude, Longitude = LadLonAddress.Longitude, Description="Hallo", Title="Blabla"};
+            return Json(Location, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpPost]
         public ActionResult Create(string address, string placeName)

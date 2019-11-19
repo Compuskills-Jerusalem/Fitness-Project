@@ -6,42 +6,91 @@
 
 <h2>Type in a address that you want to avoid</h2>
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @id = "addressraw" } })
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PlaceName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.PlaceName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PlaceName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-3">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                    <div class="col-md-3">
+                        <input type="button" id="btnShowLocations" value="Show On Map" class="btn btn-default" />
+                    </div>
+                </div>
+                   
+                </div>
+            }
+
+            <div>
+                @Html.ActionLink("Back to List", "UserInfo", "User")
             </div>
         </div>
+        <div class="col-md-6">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PlaceName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PlaceName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PlaceName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            <div id="myMap" style="position:relative; width:600px; height:400px;"></div>
+            @section Scripts {
+                @Scripts.Render("~/bundles/jquery")
+                @Scripts.Render("~/bundles/jqueryval")
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+            <script type="text/javascript">
+                var map = null;
+
+                function LoadMap() {
+                    map = new Microsoft.Maps.Map('#myMap', {
+                        credentials: "AirytvxV9hoYyYzMNmo-YT6E2A6NZEBBbndjfCF3oZ88QaDdSAO-ci8Dh8bE-L1f"
+                    });
+                }
+
+                $('#btnShowLocations').click(function () {
+                    var x = $("#addressraw").val()
+                    var url = "/Location/GetLadLon?address="+x;
+                    var lat;
+                    var lon;
+                    $.getJSON(url, null, function (data) {
+                        var pins = [];
+
+                            var pushpin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(
+                                data.Latitude,
+                                data.Longitude));
+
+                            pins.push(pushpin);
+                            lat = data.Latitude;
+                            lon = data.Longitude;
+
+                        map.entities.push(pins);
+
+                        map.setView({
+                            zoom: 17, center: new Microsoft.Maps.Location(lat, lon)
+                        });
+                    });
+                });
+            </script>
+            <script type="text/javascript" src="https://www.bing.com/api/maps/mapcontrol?callback=LoadMap" async defer></script>
+            }
+
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "UserInfo","User")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

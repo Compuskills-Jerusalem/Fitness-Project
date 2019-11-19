@@ -83,18 +83,6 @@ namespace FitnessProject.Web.Mvc.Controllers
         {
             var TempUser = User.Identity.GetUserId();
             var model =db.AlertTypes.Where(x => x.UserId == TempUser).FirstOrDefault();
-            if (model==null)
-            {
-                db.AlertTypes.Add(new AlertType
-                {
-                    EMail = true,
-                    Push = false,
-                    Text = false,
-                    UserId = TempUser
-                });
-                db.SaveChanges();
-                model = db.AlertTypes.Where(x => x.UserId == TempUser).FirstOrDefault();
-            }
             return View(model);
         }
         [HttpPost]

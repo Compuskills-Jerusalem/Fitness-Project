@@ -20,6 +20,7 @@ namespace FitnessProject.Web.Mvc.Controllers
         public void RelayMessage(double latitude, double longitude, string emailAddress)
         {
             User TempUser = db.Users.Where(x => x.Email == emailAddress).FirstOrDefault();
+            var TempAlert = db.AlertTypes.Where(x => x.UserId == TempUser.Id).FirstOrDefault();
             GeoCoordinate PersonLocation = new GeoCoordinate(latitude, longitude);
             var locations = db.NoGoZones.Where(x => x.User.Id==TempUser.Id);
 
@@ -33,18 +34,18 @@ namespace FitnessProject.Web.Mvc.Controllers
                     MsgHeader = "Alert"
                 };
 
-                if (!string.IsNullOrEmpty(TempUser.TelNr))
+                if (!string.IsNullOrEmpty(TempUser.TelNr)&& TempAlert.Text)
                 {
                     INotifications notification = new SMSNotification();
                     notification.Send(msgData);
                 }
 
-                if (!string.IsNullOrEmpty(TempUser.Email))
+                if (!string.IsNullOrEmpty(TempUser.Email) && TempAlert.EMail)
                 {
                     INotifications notification = new EMailNotification();
                     notification.Send(msgData);
                 }
-                if (!string.IsNullOrEmpty(TempUser.Push))
+                if (!string.IsNullOrEmpty(TempUser.Push) && TempAlert.Push)
                 {
                     INotifications notification = new PushFirebase();
                     notification.Send(msgData);

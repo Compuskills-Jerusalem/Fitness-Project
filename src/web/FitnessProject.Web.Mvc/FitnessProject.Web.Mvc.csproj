@@ -210,6 +210,7 @@
     <Compile Include="GpsSensor.cs" />
     <Compile Include="Identity\IdentityExtensions.cs" />
     <Compile Include="Identity\AppSignInManager.cs" />
+    <Compile Include="Models\LocationMap.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Models\Identity\AccountViewModels.cs" />
     <Compile Include="Models\Identity\ManageViewModels.cs" />
