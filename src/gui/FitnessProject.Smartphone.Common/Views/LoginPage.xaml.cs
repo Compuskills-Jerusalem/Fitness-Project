@@ -1,4 +1,5 @@
-﻿using PN_XAML.Models;
+﻿using Firebase.Iid;
+using PN_XAML.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,7 +42,7 @@ namespace PN_XAML.Views
                 //var responseString = await response.Content.ReadAsStringAsync();
 
                 await DisplayAlert("Login", "Login Success", "Ok");
-                await SendToServerAsync(LoginManager.Token);
+                SendToServerAsync(LoginManager.Token);
 
                 await Navigation.PushAsync(new MainPage());
             }
@@ -56,7 +57,7 @@ namespace PN_XAML.Views
             IEnumerable<KeyValuePair<string, string>> queries = new List<KeyValuePair<string, string>>()
             {
                 {new KeyValuePair<string, string>(key: "email", value: LoginManager.CurrentUser.Username) },
-                {new KeyValuePair<string, string>(key: "token", value: token) }
+                {new KeyValuePair<string, string>(key: "token", value: FirebaseInstanceId.Instance.Token) }
             };
             FormUrlEncodedContent q = new FormUrlEncodedContent(queries);
             using (HttpClient client = new HttpClient())

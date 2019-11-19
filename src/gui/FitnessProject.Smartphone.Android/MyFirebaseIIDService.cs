@@ -16,7 +16,7 @@ namespace PN_XAML.Droid
         {
             var refreshedToken = FirebaseInstanceId.Instance.Token;
             Log.Debug(TAG, "Refreshed token: " + refreshedToken);
-            LoginManager.Token = refreshedToken; 
+            LoginManager.Token = refreshedToken;
         }
         
     }
