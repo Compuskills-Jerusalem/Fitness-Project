@@ -16,29 +16,8 @@ namespace PN_XAML.Droid
         {
             var refreshedToken = FirebaseInstanceId.Instance.Token;
             Log.Debug(TAG, "Refreshed token: " + refreshedToken);
-            SendToServerAsync(refreshedToken);
+            LoginManager.Token = refreshedToken; 
         }
-        public async System.Threading.Tasks.Task SendToServerAsync(string token)
-        {
-
-            IEnumerable<KeyValuePair<string, string>> queries = new List<KeyValuePair<string, string>>()
-            {
-                {new KeyValuePair<string, string>(key: "Email", value: LoginManager.CurrentUser.Username) },
-                {new KeyValuePair<string, string>(key: "Token", value: token) }
-            };
-            FormUrlEncodedContent q = new FormUrlEncodedContent(queries);
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = await client.PostAsync("http://www.compuskillscapstoneprojekt.com", q))
-                {
-                    using (HttpContent content = response.Content)
-                    {
-                        string myContent = await content.ReadAsStringAsync();
-                        Console.WriteLine(myContent);
-                    }
-                }
-            }
-
-        }
+        
     }
 }

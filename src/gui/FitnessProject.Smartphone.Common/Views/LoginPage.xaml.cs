@@ -41,6 +41,7 @@ namespace PN_XAML.Views
                 //var responseString = await response.Content.ReadAsStringAsync();
 
                 await DisplayAlert("Login", "Login Success", "Ok");
+                await SendToServerAsync(LoginManager.Token);
 
                 await Navigation.PushAsync(new MainPage());
             }
@@ -48,6 +49,28 @@ namespace PN_XAML.Views
             {
                 await DisplayAlert("Login", "Login Success", "Ok");
             }
+        }
+        public async System.Threading.Tasks.Task SendToServerAsync(string token)
+        {
+
+            IEnumerable<KeyValuePair<string, string>> queries = new List<KeyValuePair<string, string>>()
+            {
+                {new KeyValuePair<string, string>(key: "email", value: LoginManager.CurrentUser.Username) },
+                {new KeyValuePair<string, string>(key: "token", value: token) }
+            };
+            FormUrlEncodedContent q = new FormUrlEncodedContent(queries);
+            using (HttpClient client = new HttpClient())
+            {
+                using (HttpResponseMessage response = await client.PostAsync("http://www.compuskillscapstoneprojekt.com/GpsSensor/FirebaseToken", q))
+                {
+                    using (HttpContent content = response.Content)
+                    {
+                        string myContent = await content.ReadAsStringAsync();
+                        Console.WriteLine(myContent);
+                    }
+                }
+            }
+
         }
 
 

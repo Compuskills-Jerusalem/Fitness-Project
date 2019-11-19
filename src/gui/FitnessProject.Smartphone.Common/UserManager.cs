@@ -8,5 +8,6 @@ namespace PN_XAML
     public class LoginManager
     {
         public static User CurrentUser { get; set; }
+        public static string Token { get; set; }
     }
 }
