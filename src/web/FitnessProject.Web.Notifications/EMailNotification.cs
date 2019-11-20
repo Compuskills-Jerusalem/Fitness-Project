@@ -99,8 +99,8 @@ namespace FitnessProject.Web.Notifications
 
         public void Send(MessageData messageData)
         {
-            ServerKey= "AAAAaYh8kqY:APA91bG4IjxR9Q5G74Fyn2soUGGSPmwc90_IIQumKCCoNIL8_DPwnZ7xKAusQocu5XRvNJ9Ltgt95VXz8pdECuHALIGID6SrrfyQiDjMczlqEfYSE4MiV_pFI48vm9Z8b3UZ4nPOoyvO";
-            SenderID = "453261431462";
+            ServerKey= "AAAAaYh8kqY:AAAAGYK30PE:APA91bFcEQhzUzMnuU9lckj9Kt1CQbdC-BpLEYH1btjw0Yw6PkJI5Jhlug1jjSe4PIZdbe5_RaQqt3geDdUT7k5H7l3qpTn19PY7XyrNXw7gi4pyZkxMAP31KIQj375IoLIMxNZe3uI_";
+            SenderID = "109567267057";
             WebRequest tRequest = WebRequest.Create("https://fcm.googleapis.com/fcm/send");
             tRequest.Method = "post";
             tRequest.Headers.Add(string.Format("Authorization: key={0}", ServerKey));

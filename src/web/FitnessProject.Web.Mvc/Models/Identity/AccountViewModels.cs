@@ -10,17 +10,24 @@ namespace FitnessProject.Web.Mvc.Models
         public string Email { get; set; }
 
     }
+    
     public class CreateUserModel
     {
+        [Required]
         [Display(Name ="E-Mail")]
         public string EmailAddress { get; set; }
+        [Required]
         public string Password { get; set; }
+        [Required]
         [Display(Name = "Confirm Password")]
         public string ConfirmPassword { get; set; }
+        [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
+        [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+        [Required]
         [Display(Name = "Tel-Nr")]
         public string TelNr { get; set; }
     }

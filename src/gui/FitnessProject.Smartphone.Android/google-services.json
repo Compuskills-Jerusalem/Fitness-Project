@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "453261431462",
-    "firebase_url": "https://compuskils-capstone-projekt.firebaseio.com",
-    "project_id": "compuskils-capstone-projekt",
-    "storage_bucket": "compuskils-capstone-projekt.appspot.com"
+    "project_number": "109567267057",
+    "firebase_url": "https://compuskills-men.firebaseio.com",
+    "project_id": "compuskills-men",
+    "storage_bucket": "compuskills-men.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:453261431462:android:bda78e18d28a15d1191a67",
+        "mobilesdk_app_id": "1:109567267057:android:9ea1931a224586666f9950",
         "android_client_info": {
           "package_name": "com.companyname.pn_xaml"
         }
       },
       "oauth_client": [
         {
-          "client_id": "453261431462-0fh29ffjj0jrr0c91ks08ajh657a6foe.apps.googleusercontent.com",
+          "client_id": "109567267057-u14fqm8fvgg37ptjc0c482u5uhub9ov3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDY1_tyLSk4nByZaK5H1BCPM1yscljQUps"
+          "current_key": "AIzaSyCIHRRroMCXZOMfiwZlIEBtnAd8-n0NBlQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "453261431462-0fh29ffjj0jrr0c91ks08ajh657a6foe.apps.googleusercontent.com",
+              "client_id": "109567267057-u14fqm8fvgg37ptjc0c482u5uhub9ov3.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
