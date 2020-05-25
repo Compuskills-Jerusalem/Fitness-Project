@@ -11,7 +11,7 @@ namespace FitnessProject.Web.GetLatitudeLongitudeFromAddress
 {
     public static class GetLatitudeLongitudeFromAddress
     {
-        const string Api = "AIzaSyCRQ2A5WO3oLqDrjyQhx6BRmf5KSgoo950";
+        const string Api = "Your Api Key";
         public static GeoCoordinate FindLocation(string address)
         {
 
